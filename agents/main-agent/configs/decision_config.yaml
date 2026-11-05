@@ -1,0 +1,30 @@
+decision:
+  require_all_agents: true
+
+  allow_partial_proposals: false
+
+  fallback_enabled: true
+
+  require_twin_evaluation: true
+
+  unknown_agent_reliability_policy: neutral
+
+scoring:
+  on_time_completion_weight: null
+
+  average_lead_time_weight: null
+
+  throughput_weight: null
+
+  resource_utilisation_weight: null
+
+  health_risk_weight: null
+
+  reliability_adjustment_weight: null
+
+guardrails:
+  minimum_twin_reliability: null
+
+  minimum_improvement_margin: null
+
+  require_operator_review_on_fallback: true
