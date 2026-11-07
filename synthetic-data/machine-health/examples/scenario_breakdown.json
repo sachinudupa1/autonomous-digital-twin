@@ -1,0 +1,227 @@
+[
+  {
+    "schema_version": "1.0",
+    "scenario_id": "SCEN-BREAKDOWN-42-S000",
+    "source": "synthetic",
+    "health_source": "calculated",
+    "mode": "sensor_input",
+    "readings": {
+      "temperature": {
+        "value": 90.46,
+        "unit": "C"
+      },
+      "vibration": {
+        "value": 10.377,
+        "unit": "configured_unit"
+      },
+      "operating_duration": {
+        "value": 895.1,
+        "unit": "minutes"
+      }
+    },
+    "health_result": {
+      "health_score": 1.8,
+      "health_category": "critical",
+      "calculation": {
+        "temperature_risk": 1.0,
+        "vibration_risk": 1.0,
+        "operating_duration_risk": 0.9099,
+        "combined_risk": 0.982,
+        "weights": {
+          "temperature": 0.5,
+          "vibration": 0.3,
+          "operating_duration": 0.2
+        },
+        "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+      }
+    },
+    "availability": "unavailable",
+    "scenario_type": "breakdown",
+    "random_seed": 42,
+    "step": 0,
+    "generator_version": "health-generator-v1",
+    "config_version": "health-config-dev-1",
+    "thresholds_status": "development_defaults_unapproved",
+    "created_at_utc": "2026-11-03T12:00:00Z"
+  },
+  {
+    "schema_version": "1.0",
+    "scenario_id": "SCEN-BREAKDOWN-42-S001",
+    "source": "synthetic",
+    "health_source": "calculated",
+    "mode": "sensor_input",
+    "readings": {
+      "temperature": {
+        "value": 89.49,
+        "unit": "C"
+      },
+      "vibration": {
+        "value": 13.265,
+        "unit": "configured_unit"
+      },
+      "operating_duration": {
+        "value": 815.5,
+        "unit": "minutes"
+      }
+    },
+    "health_result": {
+      "health_score": 4.01,
+      "health_category": "critical",
+      "calculation": {
+        "temperature_risk": 1.0,
+        "vibration_risk": 1.0,
+        "operating_duration_risk": 0.7993,
+        "combined_risk": 0.9599,
+        "weights": {
+          "temperature": 0.5,
+          "vibration": 0.3,
+          "operating_duration": 0.2
+        },
+        "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+      }
+    },
+    "availability": "unavailable",
+    "scenario_type": "breakdown",
+    "random_seed": 42,
+    "step": 1,
+    "generator_version": "health-generator-v1",
+    "config_version": "health-config-dev-1",
+    "thresholds_status": "development_defaults_unapproved",
+    "created_at_utc": "2026-11-03T12:00:00Z"
+  },
+  {
+    "schema_version": "1.0",
+    "scenario_id": "SCEN-BREAKDOWN-42-S002",
+    "source": "synthetic",
+    "health_source": "calculated",
+    "mode": "sensor_input",
+    "readings": {
+      "temperature": {
+        "value": 84.82,
+        "unit": "C"
+      },
+      "vibration": {
+        "value": 11.463,
+        "unit": "configured_unit"
+      },
+      "operating_duration": {
+        "value": 882.1,
+        "unit": "minutes"
+      }
+    },
+    "health_result": {
+      "health_score": 2.16,
+      "health_category": "critical",
+      "calculation": {
+        "temperature_risk": 1.0,
+        "vibration_risk": 1.0,
+        "operating_duration_risk": 0.8918,
+        "combined_risk": 0.9784,
+        "weights": {
+          "temperature": 0.5,
+          "vibration": 0.3,
+          "operating_duration": 0.2
+        },
+        "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+      }
+    },
+    "availability": "unavailable",
+    "scenario_type": "breakdown",
+    "random_seed": 42,
+    "step": 2,
+    "generator_version": "health-generator-v1",
+    "config_version": "health-config-dev-1",
+    "thresholds_status": "development_defaults_unapproved",
+    "created_at_utc": "2026-11-03T12:00:00Z"
+  },
+  {
+    "schema_version": "1.0",
+    "scenario_id": "SCEN-BREAKDOWN-42-S003",
+    "source": "synthetic",
+    "health_source": "calculated",
+    "mode": "sensor_input",
+    "readings": {
+      "temperature": {
+        "value": 88.97,
+        "unit": "C"
+      },
+      "vibration": {
+        "value": 13.38,
+        "unit": "configured_unit"
+      },
+      "operating_duration": {
+        "value": 794.4,
+        "unit": "minutes"
+      }
+    },
+    "health_result": {
+      "health_score": 4.6,
+      "health_category": "critical",
+      "calculation": {
+        "temperature_risk": 1.0,
+        "vibration_risk": 1.0,
+        "operating_duration_risk": 0.77,
+        "combined_risk": 0.954,
+        "weights": {
+          "temperature": 0.5,
+          "vibration": 0.3,
+          "operating_duration": 0.2
+        },
+        "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+      }
+    },
+    "availability": "unavailable",
+    "scenario_type": "breakdown",
+    "random_seed": 42,
+    "step": 3,
+    "generator_version": "health-generator-v1",
+    "config_version": "health-config-dev-1",
+    "thresholds_status": "development_defaults_unapproved",
+    "created_at_utc": "2026-11-03T12:00:00Z"
+  },
+  {
+    "schema_version": "1.0",
+    "scenario_id": "SCEN-BREAKDOWN-42-S004",
+    "source": "synthetic",
+    "health_source": "calculated",
+    "mode": "sensor_input",
+    "readings": {
+      "temperature": {
+        "value": 80.04,
+        "unit": "C"
+      },
+      "vibration": {
+        "value": 10.112,
+        "unit": "configured_unit"
+      },
+      "operating_duration": {
+        "value": 807.9,
+        "unit": "minutes"
+      }
+    },
+    "health_result": {
+      "health_score": 4.23,
+      "health_category": "critical",
+      "calculation": {
+        "temperature_risk": 1.0,
+        "vibration_risk": 1.0,
+        "operating_duration_risk": 0.7887,
+        "combined_risk": 0.9577,
+        "weights": {
+          "temperature": 0.5,
+          "vibration": 0.3,
+          "operating_duration": 0.2
+        },
+        "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+      }
+    },
+    "availability": "unavailable",
+    "scenario_type": "breakdown",
+    "random_seed": 42,
+    "step": 4,
+    "generator_version": "health-generator-v1",
+    "config_version": "health-config-dev-1",
+    "thresholds_status": "development_defaults_unapproved",
+    "created_at_utc": "2026-11-03T12:00:00Z"
+  }
+]
