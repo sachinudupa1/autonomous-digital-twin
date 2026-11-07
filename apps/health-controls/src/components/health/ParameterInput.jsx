@@ -3,8 +3,6 @@
  *
  * Styled number input for a single health parameter.
  *
- * Includes a small outline illustration corresponding to the parameter.
- *
  * Exact ranges and units will be configured after coordination
  * with Teammate 5. No unconfirmed validation is applied.
  */
@@ -34,15 +32,13 @@ const PARAMETER_ICONS = {
   vibration: {
     color: '#1677FF',
     svg: (
-      <>
-        <path
-          d="M3 12h2l2-5 4 10 3-10 3 10 2-5h2"
-          stroke="currentColor"
-          strokeWidth="1.7"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </>
+      <path
+        d="M3 12h2l2-5 4 10 3-10 3 10 2-5h2"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
     ),
   },
 
@@ -88,30 +84,13 @@ function ParameterInput({
   const parameterIcon = PARAMETER_ICONS[parameterKey];
 
   return (
-    <div className="form-field">
+    <div className="form-field hc-parameter-field">
       {/* Parameter label and outline illustration */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '11px',
-        }}
-      >
+      <div className="hc-parameter-heading">
         {parameterIcon && (
           <div
+            className={`hc-parameter-icon hc-parameter-icon--${parameterKey}`}
             aria-hidden="true"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '38px',
-              height: '38px',
-              flexShrink: 0,
-              color: parameterIcon.color,
-              background: 'var(--surface-hover)',
-              border: '1px solid var(--border)',
-              borderRadius: '11px',
-            }}
           >
             <svg
               viewBox="0 0 24 24"
@@ -121,31 +100,18 @@ function ParameterInput({
               stroke="currentColor"
               strokeLinecap="round"
               strokeLinejoin="round"
-              aria-hidden="true"
             >
               {parameterIcon.svg}
             </svg>
           </div>
         )}
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '3px',
-          }}
-        >
+        <div className="hc-parameter-copy">
           <label htmlFor={inputId} className="form-label">
             {label}
           </label>
 
-          <span
-            style={{
-              color: 'var(--text-secondary)',
-              fontSize: '11px',
-              fontWeight: 400,
-            }}
-          >
+          <span className="hc-parameter-unit">
             {unit || 'Unit to be confirmed'}
           </span>
         </div>
@@ -165,12 +131,10 @@ function ParameterInput({
         }
         readOnly={readOnly}
         placeholder={placeholder}
-        className="form-input"
+        className={`form-input hc-parameter-input ${
+          readOnly ? 'hc-parameter-input--readonly' : ''
+        }`}
         aria-label={`${label}${unit ? ` in ${unit}` : ''}`}
-        style={{
-          cursor: readOnly ? 'default' : 'text',
-          opacity: readOnly ? 0.8 : 1,
-        }}
       />
 
       {/* Accepted range information */}

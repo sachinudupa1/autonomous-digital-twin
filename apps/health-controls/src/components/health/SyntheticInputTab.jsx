@@ -6,7 +6,7 @@ import SharedControls from './SharedControls';
 import ConfirmationModal from './ConfirmationModal';
 import { PARAMETER_CONFIG, NORMAL_VALUES } from '../../config/constants';
 
-function SyntheticInputTab() {
+function SyntheticInputTab({ lineId }) {
   const [values, setValues] = useState({
     temperature: '',
     vibration: '',
@@ -23,29 +23,25 @@ function SyntheticInputTab() {
   const [showModal, setShowModal] = useState(false);
   const [isApplying, setIsApplying] = useState(false);
 
-  // Populated after a successful apply; shown as source + timestamp.
-  // The setter will be added when healthService.applyConditions() is wired.
   const [lastApplied] = useState(null);
 
   // Integration point:
-  // Connect this handler to healthService.generateSyntheticData().
-  // Every click must request a fresh set from Teammate 5's generator.
+  // Request fresh synthetic data for this specific line.
   const handleGenerate = async () => {
     setIsGenerating(true);
 
     try {
       // TODO:
-      // const generatedData = await healthService.generateSyntheticData();
-      // setValues(generatedData);
-      // setHasGenerated(true);
-      // Recalculate health using the generated values.
+      // Pass lineId to the synthetic data service.
+      // Example payload: { lineId }
+      // Update values and setHasGenerated(true) from the service response.
 
       console.warn(
-        '[SyntheticInputTab] Synthetic generation is not yet connected.'
+        `[SyntheticInputTab] Synthetic generation for ${lineId} is not yet connected.`
       );
     } catch (error) {
       console.error(
-        '[SyntheticInputTab] Failed to generate synthetic data:',
+        `[SyntheticInputTab] Failed to generate data for ${lineId}:`,
         error
       );
     } finally {
@@ -63,9 +59,8 @@ function SyntheticInputTab() {
     setValues(updatedValues);
 
     // Integration point:
-    // const result = healthService.calculateHealth(updatedValues);
-    // setHealthScore(result.score);
-    // setHealthClassification(result.classification);
+    // Include lineId with the updated values when requesting
+    // a health calculation. Update the result from the service response.
 
     void setHealthScore;
     void setHealthClassification;
@@ -90,30 +85,23 @@ function SyntheticInputTab() {
   };
 
   // Integration point:
-  // Connect to healthService.applyConditions(values, 'synthetic').
+  // Apply conditions with both lineId and source='synthetic'.
   const handleConfirmApply = async () => {
     setIsApplying(true);
 
     try {
       // TODO:
-      // const result = await healthService.applyConditions(
-      //   values,
-      //   'synthetic'
-      // );
-      //
-      // setLastApplied({
-      //   source: 'Synthetic Data',
-      //   timestamp: result.timestamp,
-      // });
+      // Include lineId, values, and source in the apply request.
+      // Example payload: { lineId, source: 'synthetic', values }
 
       console.warn(
-        '[SyntheticInputTab] Applying conditions is not yet connected.'
+        `[SyntheticInputTab] Applying conditions to ${lineId} is not yet connected.`
       );
 
       setShowModal(false);
     } catch (error) {
       console.error(
-        '[SyntheticInputTab] Failed to apply conditions:',
+        `[SyntheticInputTab] Failed to apply conditions to ${lineId}:`,
         error
       );
     } finally {
@@ -126,53 +114,29 @@ function SyntheticInputTab() {
   };
 
   return (
-    <div className="content-panel">
+    <div className="content-panel" data-line-id={lineId}>
       {/* Section heading */}
       <div className="section-heading">
-        <h3 className="section-title">Synthetic Condition Generation</h3>
+        <h3 className="section-title">
+          Synthetic Condition Generation
+        </h3>
 
         <p className="section-description">
-          Generate a fresh set of simulated operating conditions for the
-          entire packaging line. Review and edit the values before applying.
+          Generate a fresh set of simulated operating conditions for this
+          packaging line. Review and edit the values before applying.
         </p>
       </div>
 
       {/* Generation controls */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-          gap: '15px',
-          padding: '17px',
-          marginBottom: '25px',
-          background: 'var(--surface-hover)',
-          border: '1px solid var(--border)',
-          borderRadius: '14px',
-        }}
-      >
-        <div style={{ flex: '1 1 180px' }}>
-          <p
-            style={{
-              margin: 0,
-              color: 'var(--text-primary)',
-              fontSize: '13px',
-              fontWeight: 700,
-            }}
-          >
+      <div className="hc-generation-panel">
+        <div className="hc-generation-panel__copy">
+          <p className="hc-generation-panel__title">
             Generate operating conditions
           </p>
 
-          <p
-            style={{
-              margin: '5px 0 0',
-              color: 'var(--text-secondary)',
-              fontSize: '11px',
-              lineHeight: 1.5,
-            }}
-          >
-            Each generation requests a fresh set of synthetic values.
+          <p className="hc-generation-panel__description">
+            Each generation requests a fresh set of synthetic values for
+            {` ${lineId.replace('_', ' ')}.`}
           </p>
         </div>
 
@@ -180,16 +144,14 @@ function SyntheticInputTab() {
           type="button"
           onClick={handleGenerate}
           disabled={isGenerating}
-          className="primary-button"
-          style={{
-            minWidth: '190px',
-            background: 'linear-gradient(135deg, #20B65A, #16A34A)',
-            boxShadow: '0 7px 18px rgba(22, 163, 74, 0.18)',
-          }}
+          className="primary-button hc-generation-button"
         >
           {isGenerating ? (
             <>
-              <span aria-hidden="true">⏳</span>
+              <span
+                className="hc-generation-spinner"
+                aria-hidden="true"
+              />
               Generating...
             </>
           ) : (
@@ -216,6 +178,7 @@ function SyntheticInputTab() {
                   strokeLinejoin="round"
                 />
               </svg>
+
               Generate Synthetic Data
             </>
           )}
@@ -224,34 +187,28 @@ function SyntheticInputTab() {
 
       {/* Generation status */}
       {hasGenerated && (
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '9px',
-            padding: '11px 13px',
-            marginBottom: '23px',
-            color: 'var(--brand-green)',
-            background: 'rgba(22, 163, 74, 0.08)',
-            border: '1px solid rgba(22, 163, 74, 0.2)',
-            borderRadius: '10px',
-            fontSize: '12px',
-            fontWeight: 600,
-          }}
-        >
-          <span aria-hidden="true">✓</span>
-          Synthetic values generated. You can edit them before applying.
+        <div className="hc-generation-status" role="status">
+          <span
+            className="hc-generation-status__icon"
+            aria-hidden="true"
+          >
+            ✓
+          </span>
+
+          <span>
+            Synthetic values generated. You can edit them before applying.
+          </span>
         </div>
       )}
 
       {/* Editable health parameters */}
-      <div className="section-heading">
-        <h4 className="section-title" style={{ fontSize: '14px' }}>
+      <div className="section-heading hc-parameters-heading">
+        <h4 className="section-title hc-parameters-title">
           Operating Parameters
         </h4>
 
         <p className="section-description">
-          All values represent the overall packaging line.
+          All values represent {lineId.replace('_', ' ')} only.
         </p>
       </div>
 
@@ -261,7 +218,9 @@ function SyntheticInputTab() {
           unit={PARAMETER_CONFIG.temperature.unit}
           value={values.temperature}
           onChange={handleChange('temperature')}
-          placeholder={hasGenerated ? 'Enter value' : 'Waiting for data generation'}
+          placeholder={
+            hasGenerated ? 'Enter value' : 'Waiting for data generation'
+          }
         />
 
         <ParameterInput
@@ -269,7 +228,9 @@ function SyntheticInputTab() {
           unit={PARAMETER_CONFIG.vibration.unit}
           value={values.vibration}
           onChange={handleChange('vibration')}
-          placeholder={hasGenerated ? 'Enter value' : 'Waiting for data generation'}
+          placeholder={
+            hasGenerated ? 'Enter value' : 'Waiting for data generation'
+          }
         />
 
         <ParameterInput
@@ -277,7 +238,9 @@ function SyntheticInputTab() {
           unit={PARAMETER_CONFIG.operatingDuration.unit}
           value={values.operatingDuration}
           onChange={handleChange('operatingDuration')}
-          placeholder={hasGenerated ? 'Enter value' : 'Waiting for data generation'}
+          placeholder={
+            hasGenerated ? 'Enter value' : 'Waiting for data generation'
+          }
         />
 
         <MachineWearInput
@@ -287,7 +250,7 @@ function SyntheticInputTab() {
       </div>
 
       {/* Calculated health result */}
-      <div style={{ marginTop: '30px' }}>
+      <div className="hc-health-result">
         <HealthResult
           score={healthScore}
           classification={healthClassification}
@@ -296,7 +259,7 @@ function SyntheticInputTab() {
 
       {/* Last applied information */}
       {lastApplied && (
-        <p className="form-hint" style={{ marginTop: '17px' }}>
+        <p className="form-hint hc-last-applied">
           <strong>Source:</strong> {lastApplied.source}
           {' · '}
           <strong>Last applied:</strong>{' '}
@@ -305,7 +268,7 @@ function SyntheticInputTab() {
       )}
 
       {/* Reset and apply */}
-      <div style={{ marginTop: '28px' }}>
+      <div className="hc-shared-controls">
         <SharedControls
           onReset={handleReset}
           onApply={handleApply}

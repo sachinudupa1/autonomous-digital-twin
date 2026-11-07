@@ -1,9 +1,15 @@
-
 @import "tailwindcss";
 
-/* =========================================
-   1. GLOBAL DESIGN TOKENS — LIGHT THEME
-========================================= */
+/* =====================================================
+   AUTOPACK HEALTH CONTROLS
+   CONSOLIDATED DESIGN SYSTEM
+   VISUAL REFERENCE: AUTOPACK DASHBOARD
+===================================================== */
+
+
+/* =====================================================
+   1. GLOBAL DESIGN TOKENS — DARK THEME DEFAULT
+===================================================== */
 
 :root {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system,
@@ -14,77 +20,101 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  /* Bright AutoPack colour palette */
-  --brand-orange: #FF8500;
-  --brand-green: #22E66B;
-  --brand-blue: #258BFF;
-  --brand-pink: #22E66B;
-  --brand-yellow: #FFE033;
+  /* Shared AutoPack brand palette */
+  --brand-orange: #FF7900;
+  --brand-green: #16A34A;
+  --brand-blue: #1677FF;
+  --brand-pink: #FF4F9A;
+  --brand-yellow: #FFD400;
+  --brand-cyan: #00C8D7;
+  --brand-red: #EF4444;
 
-  --page-bg: #F3F6FA;
-  --surface: rgba(255, 255, 255, 0.82);
-  --surface-solid: #FFFFFF;
-  --surface-hover: #F8FAFC;
+  /* Dark surfaces */
+  --page-bg: #080D17;
+  --surface: #101827;
+  --surface-solid: #101827;
+  --surface-elevated: #172338;
+  --surface-hover: #19263A;
 
-  --text-primary: #182230;
-  --text-secondary: #53657D;
-  --text-muted: #8292A8;
+  /* Text */
+  --text-primary: #F4F7FC;
+  --text-secondary: #B6C4D8;
+  --text-muted: #8293A9;
 
-  --border: rgba(100, 116, 139, 0.25);
-  --border-strong: rgba(100, 116, 139, 0.42);
+  /* Borders */
+  --border: rgba(137, 157, 183, 0.19);
+  --border-strong: rgba(137, 157, 183, 0.34);
 
-  --input-bg: rgba(255, 255, 255, 0.94);
-  --input-border: #B9C7D8;
+  /* Inputs */
+  --input-bg: #0B1422;
+  --input-border: rgba(137, 157, 183, 0.30);
 
-  --accent: var(--brand-orange);
-  --accent-hover: #E66D00;
-  --accent-soft: rgba(255, 133, 0, 0.13);
+  /* Primary interaction */
+  --accent: var(--brand-blue);
+  --accent-hover: #0867E8;
+  --accent-soft: rgba(22, 119, 255, 0.14);
 
+  /* Status colours */
+  --success: var(--brand-green);
+  --warning: var(--brand-yellow);
+  --danger: var(--brand-red);
+  --info: var(--brand-cyan);
+
+  /* Shadows */
   --shadow:
-    0 20px 60px rgba(30, 41, 59, 0.09),
-    0 4px 14px rgba(30, 41, 59, 0.05);
+    0 8px 24px rgba(0, 0, 0, 0.18);
 
-  --glass-blur: 22px;
+  --shadow-soft:
+    0 2px 8px rgba(0, 0, 0, 0.12);
 
-  color-scheme: light;
-}
-
-
-/* =========================================
-   2. DARK THEME
-========================================= */
-
-:root[data-theme="dark"] {
-  --page-bg: #080F1D;
-  --surface: rgba(20, 34, 55, 0.88);
-  --surface-solid: #142239;
-  --surface-hover: #203653;
-
-  --text-primary: #F8FAFC;
-  --text-secondary: #C0CEE0;
-  --text-muted: #91A3BA;
-
-  --border: rgba(165, 190, 220, 0.22);
-  --border-strong: rgba(165, 190, 220, 0.38);
-
-  --input-bg: rgba(7, 15, 29, 0.94);
-  --input-border: #526984;
-
-  --accent: #FF922E;
-  --accent-hover: #FFAA50;
-  --accent-soft: rgba(255, 146, 46, 0.20);
-
-  --shadow:
-    0 24px 70px rgba(0, 0, 0, 0.36),
-    0 4px 16px rgba(0, 0, 0, 0.22);
+  /* Corners */
+  --radius-panel: 14px;
+  --radius-card: 12px;
+  --radius-control: 9px;
 
   color-scheme: dark;
 }
 
 
-/* =========================================
-   3. GLOBAL RESET AND PAGE BACKGROUND
-========================================= */
+/* =====================================================
+   2. LIGHT THEME
+===================================================== */
+
+:root[data-theme="light"] {
+  --page-bg: #F1F5FA;
+
+  --surface: #FFFFFF;
+  --surface-solid: #FFFFFF;
+  --surface-elevated: #FFFFFF;
+  --surface-hover: #EDF2F8;
+
+  --text-primary: #172337;
+  --text-secondary: #53657D;
+  --text-muted: #8191A6;
+
+  --border: rgba(100, 116, 139, 0.18);
+  --border-strong: rgba(100, 116, 139, 0.30);
+
+  --input-bg: #FFFFFF;
+  --input-border: #C7D2E0;
+
+  --accent: var(--brand-blue);
+  --accent-hover: #0867E8;
+  --accent-soft: rgba(22, 119, 255, 0.10);
+
+  --shadow:
+    0 8px 24px rgba(30, 41, 59, 0.055);
+
+  --shadow-soft:
+    0 2px 8px rgba(30, 41, 59, 0.045);
+
+  color-scheme: light;
+}
+
+
+/* =====================================================
+   3. GLOBAL RESET
+===================================================== */
 
 * {
   box-sizing: border-box;
@@ -107,55 +137,26 @@ body {
   overflow-x: hidden;
 
   color: var(--text-primary);
-  background-color: var(--page-bg);
-
-  background-image:
-    radial-gradient(
-      ellipse at 10% 5%,
-      rgba(255, 133, 0, 0.12),
-      transparent 34%
-    ),
-    radial-gradient(
-      ellipse at 92% 12%,
-      rgba(37, 139, 255, 0.12),
-      transparent 32%
-    ),
-    radial-gradient(
-      ellipse at 85% 90%,
-      rgba(34, 230, 107, 0.10),
-      transparent 30%
-    );
+  background: var(--page-bg);
 
   transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
-}
-
-:root[data-theme="dark"] body {
-  background-image:
-    radial-gradient(
-      ellipse at 8% 5%,
-      rgba(255, 133, 0, 0.20),
-      transparent 36%
-    ),
-    radial-gradient(
-      ellipse at 92% 12%,
-      rgba(37, 139, 255, 0.20),
-      transparent 34%
-    ),
-    radial-gradient(
-      ellipse at 85% 90%,
-      rgba(34, 230, 107, 0.15),
-      transparent 32%
-    );
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 #root {
+  width: 100%;
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
+
+  text-align: initial;
 }
 
 button,
-input {
+input,
+select,
+textarea {
   font: inherit;
 }
 
@@ -169,48 +170,45 @@ button:disabled {
 
 ::selection {
   color: #FFFFFF;
-  background: var(--brand-orange);
+  background: var(--brand-blue);
 }
 
 :focus-visible {
-  outline: 3px solid rgba(255, 133, 0, 0.42);
+  outline: 3px solid rgba(22, 119, 255, 0.38);
   outline-offset: 3px;
 }
 
 
-/* =========================================
-   4. GLASSMORPHISM SURFACES
-========================================= */
+/* =====================================================
+   4. SHARED PANEL SURFACES
+===================================================== */
 
 .glass-panel {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 24px;
-
-  backdrop-filter: blur(var(--glass-blur));
-  -webkit-backdrop-filter: blur(var(--glass-blur));
-
+  border-radius: var(--radius-panel);
   box-shadow: var(--shadow);
 }
 
 .glass-card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 18px;
-
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  border-radius: var(--radius-card);
 
   transition:
-    background-color 0.25s ease,
-    border-color 0.25s ease,
-    transform 0.25s ease;
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.glass-card:hover {
+  border-color: var(--border-strong);
 }
 
 
-/* =========================================
+/* =====================================================
    5. THEME TOGGLE
-========================================= */
+===================================================== */
 
 .theme-toggle {
   display: inline-flex;
@@ -218,37 +216,38 @@ button:disabled {
   justify-content: center;
   gap: 9px;
 
-  min-height: 40px;
-  padding: 8px 13px;
+  min-height: 39px;
+  padding: 8px 12px;
 
   color: var(--text-secondary);
   background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
 
-  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+
+  font-size: 12px;
   font-weight: 600;
 
   transition:
-    background 0.2s ease,
+    background-color 0.2s ease,
     border-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
+    color 0.2s ease;
 }
 
 .theme-toggle:hover {
   color: var(--text-primary);
   background: var(--surface-hover);
   border-color: var(--border-strong);
-  transform: translateY(-1px);
 }
 
 .theme-toggle__icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
+
+  width: 17px;
+  height: 17px;
+
   color: var(--accent);
 }
 
@@ -262,9 +261,9 @@ button:disabled {
 }
 
 
-/* =========================================
+/* =====================================================
    6. LOGIN PAGE
-========================================= */
+===================================================== */
 
 .login-page {
   position: relative;
@@ -276,40 +275,15 @@ button:disabled {
 
   min-height: 100vh;
   padding: 32px 20px;
-  overflow: hidden;
-}
 
-.login-page::before,
-.login-page::after {
-  content: "";
-  position: absolute;
-  z-index: -1;
-
-  width: 340px;
-  height: 340px;
-
-  border-radius: 50%;
-  filter: blur(85px);
-  opacity: 0.36;
-  pointer-events: none;
-}
-
-.login-page::before {
-  top: -170px;
-  left: -120px;
-  background: rgba(255, 133, 0, 0.42);
-}
-
-.login-page::after {
-  right: -140px;
-  bottom: -180px;
-  background: rgba(37, 139, 255, 0.36);
+  background: var(--page-bg);
 }
 
 .login-page__theme {
   position: absolute;
-  top: 26px;
+  top: 24px;
   right: 28px;
+  z-index: 2;
 }
 
 .login-shell {
@@ -318,13 +292,11 @@ button:disabled {
 }
 
 .login-card {
-  padding: 38px;
+  padding: 36px;
+
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 26px;
-
-  backdrop-filter: blur(26px);
-  -webkit-backdrop-filter: blur(26px);
+  border-radius: var(--radius-panel);
 
   box-shadow: var(--shadow);
 }
@@ -334,81 +306,93 @@ button:disabled {
   align-items: center;
   justify-content: center;
 
-  width: 58px;
-  height: 58px;
-  margin-bottom: 17px;
+  width: 54px;
+  height: 54px;
+  margin-bottom: 16px;
 
-  color: white;
-  background: linear-gradient(145deg, #FFAA50, #FF8500);
-  border-radius: 18px;
+  color: var(--brand-orange);
+  background: var(--surface-elevated);
 
-  box-shadow: 0 9px 26px rgba(255, 133, 0, 0.32);
+  border: 1px solid var(--border-strong);
+  border-radius: 13px;
 }
 
 .brand-mark svg {
-  width: 30px;
-  height: 30px;
+  width: 29px;
+  height: 29px;
 }
 
 .login-brand {
   display: flex;
   flex-direction: column;
   align-items: center;
+
   margin-bottom: 30px;
   text-align: center;
 }
 
 .login-brand__name {
   margin: 0;
+
   color: var(--text-primary);
-  font-size: 27px;
+
+  font-size: 26px;
   font-weight: 800;
-  letter-spacing: -1.1px;
+  letter-spacing: -0.9px;
 }
 
 .login-brand__subtitle {
   margin: 7px 0 0;
-  color: var(--text-secondary);
-  font-size: 13px;
-  letter-spacing: 0.15px;
+
+  color: var(--text-muted);
+
+  font-size: 12px;
+  letter-spacing: 0.1px;
 }
 
 .login-heading {
-  margin-bottom: 24px;
+  margin-bottom: 23px;
   text-align: left;
 }
 
 .login-heading__title {
   margin: 0 0 7px;
+
   color: var(--text-primary);
-  font-size: 21px;
+
+  font-size: 20px;
   font-weight: 700;
-  letter-spacing: -0.45px;
+  letter-spacing: -0.4px;
 }
 
 .login-heading__description {
   margin: 0;
+
   color: var(--text-secondary);
+
   font-size: 13px;
   line-height: 1.6;
 }
 
 .login-footer {
-  margin-top: 25px;
+  margin: 24px 0 0;
+
   color: var(--text-muted);
+
   font-size: 11px;
   text-align: center;
 }
 
 
-/* =========================================
+/* =====================================================
    7. FORM FIELDS
-========================================= */
+===================================================== */
 
 .form-stack {
   display: flex;
   flex-direction: column;
-  gap: 19px;
+  gap: 18px;
+
   width: 100%;
 }
 
@@ -416,34 +400,36 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 8px;
+
   width: 100%;
 }
 
 .form-label {
   color: var(--text-primary);
-  font-size: 13px;
+
+  font-size: 12px;
   font-weight: 600;
 }
 
 .form-input {
   width: 100%;
-  min-height: 47px;
-  padding: 11px 14px;
+  min-height: 43px;
+  padding: 10px 13px;
 
   color: var(--text-primary);
   background: var(--input-bg);
 
   border: 1px solid var(--input-border);
-  border-radius: 11px;
+  border-radius: var(--radius-control);
 
-  font-size: 14px;
+  font-size: 13px;
 
   outline: none;
 
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease,
-    background 0.2s ease;
+    background-color 0.2s ease;
 }
 
 .form-input::placeholder {
@@ -459,59 +445,70 @@ button:disabled {
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
+.form-input:read-only {
+  cursor: default;
+}
+
+.form-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 .form-error {
   margin: 0;
-  color: #FF6666;
+
+  color: var(--brand-red);
+
   font-size: 12px;
   line-height: 1.5;
 }
 
 .form-hint {
   color: var(--text-muted);
+
   font-size: 11px;
   line-height: 1.5;
 }
 
 
-/* =========================================
+/* =====================================================
    8. BUTTONS
-========================================= */
+===================================================== */
 
 .primary-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 9px;
+  gap: 8px;
 
-  min-height: 46px;
-  padding: 12px 19px;
+  min-height: 42px;
+  padding: 10px 17px;
 
   color: #FFFFFF;
-  background: linear-gradient(135deg, #FFA13D, #FF7900);
+  background: var(--brand-blue);
 
-  border: 0;
-  border-radius: 11px;
+  border: 1px solid var(--brand-blue);
+  border-radius: var(--radius-control);
 
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 650;
   letter-spacing: 0.1px;
 
-  box-shadow: 0 7px 20px rgba(255, 133, 0, 0.26);
-
   transition:
-    transform 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease,
     box-shadow 0.2s ease,
-    filter 0.2s ease;
+    transform 0.2s ease;
 }
 
 .primary-button:hover:not(:disabled) {
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(255, 133, 0, 0.34);
-  filter: brightness(1.05);
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  box-shadow: 0 4px 12px rgba(22, 119, 255, 0.20);
 }
 
 .primary-button:active:not(:disabled) {
-  transform: translateY(0);
+  transform: translateY(1px);
 }
 
 .primary-button:disabled {
@@ -525,131 +522,355 @@ button:disabled {
   justify-content: center;
   gap: 8px;
 
-  min-height: 42px;
-  padding: 10px 16px;
+  min-height: 40px;
+  padding: 9px 15px;
 
   color: var(--text-secondary);
   background: var(--surface);
-  border: 1px solid var(--border-strong);
-  border-radius: 10px;
 
-  font-size: 13px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-control);
+
+  font-size: 12px;
   font-weight: 600;
 
   transition:
-    background 0.2s ease,
+    background-color 0.2s ease,
     border-color 0.2s ease,
     color 0.2s ease;
 }
 
-.secondary-button:hover {
+.secondary-button:hover:not(:disabled) {
   color: var(--text-primary);
   background: var(--surface-hover);
+  border-color: var(--border-strong);
+}
+
+.secondary-button:disabled {
+  opacity: 0.55;
 }
 
 
-/* =========================================
-   9. APPLICATION HEADER
-========================================= */
+/* =====================================================
+   9. APPLICATION SHELL
+===================================================== */
 
 .app-shell {
   min-height: 100vh;
+  background: var(--page-bg);
 }
 
-.app-header {
+.hc-layout {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+/* =====================================================
+   10. LEFT SIDEBAR
+===================================================== */
+
+.hc-sidebar {
   position: sticky;
   top: 0;
-  z-index: 20;
+  z-index: 30;
 
-  width: 100%;
+  display: flex;
+  flex: 0 0 260px;
+  flex-direction: column;
+
+  width: 260px;
+  height: 100vh;
+  min-height: 600px;
+
+  padding: 23px 16px 18px;
 
   background: var(--surface);
-  border-bottom: 1px solid var(--border);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border);
 }
 
-.app-header__inner {
+/* Sidebar brand */
+
+.hc-sidebar__brand {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 20px;
+  gap: 12px;
 
-  width: min(100% - 48px, 1200px);
-  min-height: 76px;
-  margin: 0 auto;
-}
-
-.app-brand {
-  display: flex;
-  align-items: center;
-  gap: 13px;
   min-width: 0;
+  padding: 0 7px 22px;
 }
 
-.app-brand__mark {
+.hc-sidebar__brand-mark {
   display: flex;
   align-items: center;
   justify-content: center;
 
-  width: 39px;
-  height: 39px;
+  width: 40px;
+  height: 40px;
   flex-shrink: 0;
 
-  color: white;
-  background: linear-gradient(145deg, #FFAA50, #FF8500);
-  border-radius: 12px;
+  color: var(--brand-orange);
+  background: var(--surface-elevated);
 
-  box-shadow: 0 5px 16px rgba(255, 133, 0, 0.28);
+  border: 1px solid var(--border-strong);
+  border-radius: 11px;
 }
 
-.app-brand__mark svg {
-  width: 22px;
-  height: 22px;
+.hc-sidebar__brand-mark svg {
+  width: 25px;
+  height: 25px;
 }
 
-.app-brand__name {
+.hc-sidebar__brand-copy {
+  min-width: 0;
+}
+
+.hc-sidebar__brand-name {
   margin: 0;
+
   color: var(--text-primary);
+
   font-size: 17px;
   font-weight: 800;
-  letter-spacing: -0.5px;
+  letter-spacing: -0.55px;
 }
 
-.app-brand__meta {
+.hc-sidebar__brand-meta {
   display: block;
   margin-top: 3px;
+
   color: var(--text-muted);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 1px;
+
+  font-size: 9px;
+  font-weight: 650;
+  letter-spacing: 1.1px;
   text-transform: uppercase;
 }
 
-.app-header__actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
+.hc-sidebar__divider {
+  height: 1px;
+  flex-shrink: 0;
+
+  margin: 0 7px 24px;
+
+  background: var(--border);
 }
 
-.signout-button {
-  min-height: 40px;
-  padding: 8px 14px;
+/* Sidebar navigation */
+
+.hc-sidebar__navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hc-sidebar__section-label {
+  margin: 0 0 7px;
+  padding: 0 12px;
+
+  color: var(--text-muted);
+
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.15px;
+}
+
+.hc-sidebar__nav-item {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  min-height: 43px;
+  padding: 9px 13px;
 
   color: var(--text-secondary);
   background: transparent;
-  border: 1px solid var(--border);
-  border-radius: 10px;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
 
   font-size: 12px;
   font-weight: 600;
 
   transition:
     color 0.2s ease,
-    background 0.2s ease,
+    background-color 0.2s ease,
     border-color 0.2s ease;
+}
+
+.hc-sidebar__nav-item--active {
+  color: var(--brand-blue);
+  background: var(--accent-soft);
+  border-color: rgba(22, 119, 255, 0.13);
+}
+
+.hc-sidebar__nav-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+
+  color: inherit;
+}
+
+.hc-sidebar__nav-icon svg {
+  width: 19px;
+  height: 19px;
+}
+
+.hc-sidebar__nav-label {
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.hc-sidebar__nav-indicator {
+  position: absolute;
+  top: 9px;
+  bottom: 9px;
+  left: -16px;
+
+  width: 3px;
+
+  background: var(--brand-blue);
+  border-radius: 0 4px 4px 0;
+}
+
+/* Sidebar footer */
+
+.hc-sidebar__footer {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: auto;
+  padding: 16px 10px 3px;
+
+  color: var(--text-muted);
+
+  border-top: 1px solid var(--border);
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.hc-sidebar__footer-dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+
+  background: var(--brand-cyan);
+  border-radius: 50%;
+}
+
+
+/* =====================================================
+   11. MAIN WORKSPACE AND TOPBAR
+===================================================== */
+
+.hc-workspace {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+
+  width: calc(100% - 260px);
+  min-width: 0;
+  min-height: 100vh;
+}
+
+/* Topbar */
+
+.hc-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  width: 100%;
+  min-height: 72px;
+  padding: 0 30px;
+
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.hc-topbar__context {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  min-width: 0;
+}
+
+.hc-topbar__breadcrumb {
+  color: var(--text-muted);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.hc-topbar__separator {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+.hc-topbar__current {
+  color: var(--text-secondary);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+}
+
+.hc-topbar__actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+
+  flex-shrink: 0;
+}
+
+/* Sign out button */
+
+.signout-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  min-height: 39px;
+  padding: 8px 12px;
+
+  color: var(--text-secondary);
+  background: transparent;
+
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.signout-button svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
 
 .signout-button:hover {
@@ -659,180 +880,1157 @@ button:disabled {
 }
 
 
-/* =========================================
-   10. MAIN APPLICATION CONTENT
-========================================= */
+/* =====================================================
+   12. MAIN PAGE CONTENT
+===================================================== */
 
 .app-main {
-  width: min(100% - 48px, 960px);
-  margin: 0 auto;
-  padding: 42px 0 64px;
+  flex: 1;
+
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
+.hc-main {
+  padding: 30px 34px 48px;
+}
+
+.hc-main__content {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+}
+
+
+/* =====================================================
+   13. PAGE HEADING
+===================================================== */
+
 .page-heading {
-  margin-bottom: 30px;
+  margin-bottom: 27px;
+}
+
+.hc-page-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.hc-page-heading__topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  margin-bottom: 9px;
 }
 
 .page-eyebrow {
-  margin: 0 0 9px;
-  color: var(--accent);
-  font-size: 11px;
+  margin: 0;
+
+  color: var(--brand-orange);
+
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 1.5px;
+  letter-spacing: 1.25px;
   text-transform: uppercase;
 }
 
 .page-title {
   margin: 0;
+
   color: var(--text-primary);
-  font-size: clamp(25px, 4vw, 32px);
-  font-weight: 800;
-  letter-spacing: -1px;
+
+  font-size: clamp(25px, 3vw, 30px);
+  font-weight: 750;
+  letter-spacing: -0.8px;
   line-height: 1.2;
 }
 
 .page-description {
-  max-width: 620px;
-  margin: 11px 0 0;
+  max-width: 690px;
+  margin: 9px 0 0;
+
   color: var(--text-secondary);
-  font-size: 14px;
-  line-height: 1.7;
+
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+/* Simulation environment label */
+
+.hc-environment-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  min-height: 30px;
+  padding: 6px 10px;
+
+  color: var(--text-secondary);
+  background: var(--surface);
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  font-size: 10px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.hc-environment-label__dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+
+  background: var(--brand-cyan);
+  border-radius: 50%;
 }
 
 
-/* =========================================
-   11. TAB NAVIGATION
-========================================= */
+/* =====================================================
+   14. INPUT CONFIGURATION AND TABS
+===================================================== */
+
+.hc-input-section {
+  margin-bottom: 19px;
+}
+
+.hc-input-section__heading {
+  margin-bottom: 12px;
+}
+
+.hc-input-section__title {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+}
+
+.hc-input-section__description {
+  margin: 5px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+/* Tab container */
 
 .tabs {
   display: flex;
-  align-items: center;
-  gap: 7px;
+  align-items: stretch;
+  gap: 5px;
 
   width: fit-content;
   max-width: 100%;
-  margin-bottom: 24px;
-  padding: 5px;
+  margin-bottom: 20px;
+  padding: 4px;
 
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 13px;
+  border-radius: 10px;
 }
 
+.hc-input-tabs {
+  width: fit-content;
+  margin-bottom: 0;
+}
+
+/* Individual tabs */
+
 .tab-button {
-  min-height: 39px;
-  padding: 9px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 36px;
+  padding: 8px 16px;
 
   color: var(--text-secondary);
   background: transparent;
+
   border: 0;
-  border-radius: 9px;
+  border-radius: 7px;
 
   font-size: 12px;
-  font-weight: 650;
+  font-weight: 600;
   white-space: nowrap;
 
   transition:
     color 0.2s ease,
-    background 0.2s ease,
-    box-shadow 0.2s ease;
+    background-color 0.2s ease;
 }
 
 .tab-button:hover {
   color: var(--text-primary);
+  background: var(--surface-hover);
 }
 
 .tab-button[aria-selected="true"] {
   color: #FFFFFF;
-  background: var(--brand-orange);
-  box-shadow: 0 4px 14px rgba(255, 133, 0, 0.28);
+  background: var(--brand-blue);
+}
+
+.hc-input-tab {
+  align-items: flex-start;
+  flex: 1;
+
+  min-width: 205px;
+  min-height: 58px;
+  padding: 9px 15px;
+
+  flex-direction: column;
+  gap: 4px;
+
+  text-align: left;
+  white-space: normal;
+}
+
+.hc-input-tab__label {
+  color: inherit;
+
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.hc-input-tab__description {
+  color: var(--text-muted);
+
+  font-size: 10px;
+  font-weight: 450;
+  line-height: 1.35;
+}
+
+.hc-input-tab[aria-selected="true"] .hc-input-tab__description {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+/* Selected tab content */
+
+.hc-tab-content {
+  width: 100%;
+  min-width: 0;
+}
+
+.hc-tab-content:focus {
+  outline: none;
 }
 
 
-/* =========================================
-   12. HEALTH CONTROL SECTIONS
-========================================= */
+/* =====================================================
+   15. HEALTH CONTROL PANELS
+===================================================== */
 
 .content-panel {
-  padding: 27px;
+  width: 100%;
+  min-width: 0;
+
+  padding: 25px;
+
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: var(--radius-panel);
 
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  box-shadow: var(--shadow);
+  box-shadow: var(--shadow-soft);
 }
 
 .section-heading {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
 }
 
 .section-title {
   margin: 0;
+
   color: var(--text-primary);
-  font-size: 17px;
-  font-weight: 750;
-  letter-spacing: -0.3px;
+
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
 }
 
 .section-description {
-  margin: 7px 0 0;
+  margin: 6px 0 0;
+
   color: var(--text-secondary);
+
   font-size: 12px;
   line-height: 1.6;
 }
 
 
-/* =========================================
-   13. RESPONSIVE DESIGN
-========================================= */
+/* =====================================================
+   16. PARAMETER INPUTS
+===================================================== */
 
-@media (max-width: 640px) {
-  .login-page {
-    padding: 75px 16px 24px;
+.hc-parameter-field {
+  gap: 9px;
+}
+
+.hc-parameter-heading {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+
+  min-height: 38px;
+}
+
+.hc-parameter-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.hc-parameter-icon svg {
+  width: 21px;
+  height: 21px;
+}
+
+.hc-parameter-icon--temperature {
+  color: var(--brand-pink);
+}
+
+.hc-parameter-icon--vibration {
+  color: var(--brand-blue);
+}
+
+.hc-parameter-icon--operating-duration {
+  color: var(--brand-green);
+}
+
+.hc-parameter-icon--wear {
+  color: var(--brand-orange);
+}
+
+.hc-parameter-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  min-width: 0;
+}
+
+.hc-parameter-unit {
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.hc-parameter-input {
+  min-height: 42px;
+}
+
+.hc-parameter-input--readonly {
+  cursor: default;
+  opacity: 0.8;
+}
+
+
+/* =====================================================
+   17. MACHINE WEAR CONTROL
+===================================================== */
+
+.hc-machine-wear {
+  gap: 10px;
+}
+
+.hc-machine-wear__range-label {
+  margin-left: 6px;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.hc-machine-wear__number-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.hc-machine-wear__number {
+  flex: 1;
+  min-width: 0;
+
+  text-align: center;
+}
+
+.hc-machine-wear__unit {
+  flex-shrink: 0;
+
+  color: var(--text-secondary);
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.hc-machine-wear__slider-wrap {
+  margin-top: 3px;
+}
+
+.hc-machine-wear__slider {
+  display: block;
+
+  width: 100%;
+  height: 6px;
+  margin: 8px 0 10px;
+
+  accent-color: var(--brand-orange);
+  cursor: pointer;
+}
+
+.hc-machine-wear__slider:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.hc-machine-wear__scale {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  color: var(--text-muted);
+
+  font-size: 10px;
+}
+
+
+/* =====================================================
+   18. SYNTHETIC GENERATION PANEL
+===================================================== */
+
+.hc-generation-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  padding: 17px;
+  margin-bottom: 24px;
+
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.hc-generation-panel__copy {
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.hc-generation-panel__title {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hc-generation-panel__description {
+  margin: 5px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.hc-generation-button {
+  min-width: 190px;
+  flex-shrink: 0;
+}
+
+/* Generating spinner */
+
+.hc-generation-spinner {
+  display: inline-block;
+
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+
+  border: 2px solid rgba(255, 255, 255, 0.38);
+  border-top-color: #FFFFFF;
+  border-radius: 50%;
+
+  animation: hc-spin 0.75s linear infinite;
+}
+
+@keyframes hc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Synthetic generation status */
+
+.hc-generation-status {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  padding: 11px 13px;
+  margin-bottom: 23px;
+
+  color: var(--brand-green);
+  background: rgba(22, 163, 74, 0.08);
+
+  border: 1px solid rgba(22, 163, 74, 0.20);
+  border-radius: 9px;
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.hc-generation-status__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 19px;
+  height: 19px;
+  flex-shrink: 0;
+
+  color: #FFFFFF;
+  background: var(--brand-green);
+  border-radius: 50%;
+
+  font-size: 11px;
+  font-weight: 800;
+}
+
+/* Operating parameters subheading */
+
+.hc-parameters-heading {
+  margin-bottom: 18px;
+}
+
+.hc-parameters-title {
+  font-size: 14px;
+}
+
+
+/* =====================================================
+   19. HEALTH RESULT
+===================================================== */
+
+.hc-health-result {
+  margin-top: 28px;
+}
+
+.hc-health-result-card {
+  width: 100%;
+
+  padding: 19px;
+
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.hc-health-result-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-bottom: 17px;
+}
+
+.hc-health-result-card__title {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.hc-health-result-card__description {
+  margin: 5px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 11px;
+}
+
+.hc-health-result-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+  flex-shrink: 0;
+
+  color: var(--brand-cyan);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+/* Score and classification */
+
+.hc-health-result-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.hc-health-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 0;
+  min-height: 100px;
+
+  padding: 14px;
+
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.hc-health-metric__label {
+  margin: 0 0 12px;
+
+  color: var(--text-secondary);
+
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.55px;
+}
+
+.hc-health-metric__score {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+}
+
+.hc-health-metric__value {
+  color: var(--text-primary);
+
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.hc-health-metric__unit {
+  color: var(--text-muted);
+
+  font-size: 11px;
+}
+
+.hc-health-classification {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 29px;
+  max-width: 100%;
+  padding: 5px 10px;
+
+  color: var(--text-secondary);
+  background: var(--surface-hover);
+
+  border: 1px solid var(--border-strong);
+  border-radius: 7px;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+.hc-health-result-card__pending {
+  margin: 14px 0 0;
+
+  color: var(--text-muted);
+
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   20. LAST APPLIED INFORMATION
+===================================================== */
+
+.hc-last-applied {
+  display: block;
+  margin-top: 15px;
+  line-height: 1.7;
+}
+
+.hc-last-applied strong {
+  color: var(--text-secondary);
+  font-weight: 650;
+}
+
+
+/* =====================================================
+   21. RESET AND APPLY CONTROLS
+===================================================== */
+
+.hc-shared-controls {
+  margin-top: 27px;
+}
+
+.hc-shared-controls__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+
+  padding-top: 21px;
+
+  border-top: 1px solid var(--border);
+}
+
+.hc-reset-button {
+  flex: 1 1 150px;
+  min-height: 43px;
+}
+
+.hc-apply-button {
+  flex: 1 1 180px;
+  min-height: 43px;
+}
+
+
+/* =====================================================
+   22. CONFIRMATION MODAL
+===================================================== */
+
+.hc-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(3, 8, 18, 0.72);
+
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.hc-confirmation-modal {
+  width: 100%;
+  max-width: 460px;
+  max-height: 90vh;
+
+  overflow-y: auto;
+
+  padding: 26px;
+
+  background: var(--surface-solid);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-panel);
+
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.30);
+
+  animation: hc-modal-appear 0.18s ease-out;
+}
+
+@keyframes hc-modal-appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.99);
   }
 
-  .login-page__theme {
-    top: 18px;
-    right: 16px;
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal heading */
+
+.hc-modal-heading {
+  margin-bottom: 22px;
+}
+
+.hc-modal-heading__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+  margin-bottom: 15px;
+
+  color: var(--brand-blue);
+  background: var(--accent-soft);
+
+  border: 1px solid rgba(22, 119, 255, 0.15);
+  border-radius: 10px;
+}
+
+.hc-modal-heading h2 {
+  margin: 0;
+
+  color: var(--text-primary);
+
+  font-size: 20px;
+  font-weight: 750;
+  letter-spacing: -0.45px;
+}
+
+.hc-modal-heading p {
+  margin: 7px 0 0;
+
+  color: var(--text-secondary);
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+/* Input source */
+
+.hc-modal-source {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  padding: 12px 14px;
+  margin-bottom: 12px;
+
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+
+.hc-modal-source__label {
+  color: var(--text-secondary);
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.hc-modal-source__value {
+  padding: 5px 10px;
+
+  color: var(--brand-blue);
+  background: var(--accent-soft);
+
+  border-radius: 6px;
+
+  font-size: 11px;
+  font-weight: 700;
+}
+
+/* Conditions summary */
+
+.hc-modal-summary {
+  padding: 5px 15px;
+
+  background: var(--surface-hover);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.hc-modal-summary__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  padding: 12px 0;
+
+  border-bottom: 1px solid var(--border);
+}
+
+.hc-modal-summary__row--last {
+  border-bottom: none;
+}
+
+.hc-modal-summary__label {
+  color: var(--text-secondary);
+
+  font-size: 12px;
+}
+
+.hc-modal-summary__value {
+  color: var(--text-primary);
+
+  font-size: 13px;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* Packaging warning */
+
+.hc-modal-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  padding: 12px;
+  margin-top: 15px;
+
+  color: #D6A63B;
+  background: rgba(255, 212, 0, 0.08);
+
+  border: 1px solid rgba(255, 212, 0, 0.28);
+  border-radius: 9px;
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+:root[data-theme="light"] .hc-modal-warning {
+  color: #946500;
+  background: rgba(255, 212, 0, 0.10);
+}
+
+/* Modal actions */
+
+.hc-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  margin-top: 22px;
+}
+
+
+/* =====================================================
+   23. RESPONSIVE — TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+  .hc-sidebar {
+    flex-basis: 225px;
+    width: 225px;
   }
 
-  .login-card {
-    padding: 27px 22px;
-    border-radius: 21px;
+  .hc-workspace {
+    width: calc(100% - 225px);
   }
 
-  .app-header__inner {
-    width: calc(100% - 32px);
-    min-height: 68px;
-    gap: 10px;
+  .hc-topbar {
+    padding-inline: 23px;
   }
 
-  .app-brand {
-    gap: 9px;
+  .hc-main {
+    padding: 27px 24px 42px;
+  }
+}
+
+
+/* =====================================================
+   24. RESPONSIVE — MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+  .hc-layout {
+    flex-direction: column;
   }
 
-  .app-brand__mark {
+  /* Sidebar becomes a compact top navigation area */
+
+  .hc-sidebar {
+    position: relative;
+    top: auto;
+
+    display: flex;
+    flex: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+
+    width: 100%;
+    height: auto;
+    min-height: 0;
+
+    padding: 11px 16px;
+
+    border-right: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hc-sidebar__brand {
+    flex-shrink: 0;
+    padding: 0;
+  }
+
+  .hc-sidebar__brand-mark {
     width: 35px;
     height: 35px;
   }
 
-  .app-brand__name {
+  .hc-sidebar__brand-mark svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .hc-sidebar__brand-name {
     font-size: 15px;
   }
 
-  .app-brand__meta {
-    font-size: 9px;
+  .hc-sidebar__brand-meta {
+    font-size: 8px;
   }
 
-  .app-header__actions {
+  .hc-sidebar__divider,
+  .hc-sidebar__section-label,
+  .hc-sidebar__footer {
+    display: none;
+  }
+
+  .hc-sidebar__navigation {
+    margin-left: auto;
+  }
+
+  .hc-sidebar__nav-item {
+    min-height: 36px;
+    padding: 7px 10px;
+  }
+
+  .hc-sidebar__nav-indicator {
+    display: none;
+  }
+
+  .hc-sidebar__nav-icon,
+  .hc-sidebar__nav-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .hc-sidebar__nav-label {
+    font-size: 10px;
+  }
+
+  .hc-workspace {
+    width: 100%;
+    min-height: calc(100vh - 58px);
+  }
+
+  .hc-topbar {
+    position: relative;
+    top: auto;
+
+    min-height: 58px;
+    padding: 0 17px;
+  }
+
+  .hc-topbar__context {
     gap: 7px;
   }
 
+  .hc-topbar__breadcrumb,
+  .hc-topbar__separator {
+    display: none;
+  }
+
+  .hc-topbar__current {
+    font-size: 9px;
+  }
+
+  .hc-topbar__actions {
+    gap: 7px;
+  }
+
+  .hc-main {
+    padding: 24px 17px 38px;
+  }
+
+  .page-heading {
+    margin-bottom: 22px;
+  }
+
+  .page-title {
+    font-size: 25px;
+  }
+
+  .page-description {
+    font-size: 12px;
+  }
+
+  .content-panel {
+    padding: 21px 17px;
+  }
+
+  .hc-input-tabs {
+    width: 100%;
+  }
+
+  .hc-input-tab {
+    min-width: 0;
+    padding: 9px 11px;
+  }
+
+  .hc-input-tab__label {
+    font-size: 11px;
+  }
+
+  .hc-input-tab__description {
+    font-size: 9px;
+  }
+
+  .hc-generation-panel {
+    align-items: stretch;
+  }
+
+  .hc-generation-panel__copy {
+    flex-basis: 100%;
+  }
+
+  .hc-generation-button {
+    width: 100%;
+  }
+}
+
+
+/* =====================================================
+   25. RESPONSIVE — SMALL MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+  .login-page {
+    padding: 76px 16px 24px;
+  }
+
+  .login-page__theme {
+    top: 17px;
+    right: 16px;
+  }
+
+  .login-card {
+    padding: 26px 21px;
+  }
+
   .theme-toggle {
-    min-height: 37px;
+    min-height: 36px;
     padding: 7px 9px;
   }
 
@@ -841,34 +2039,145 @@ button:disabled {
   }
 
   .signout-button {
-    min-height: 37px;
-    padding: 7px 10px;
-    font-size: 11px;
+    min-height: 36px;
+    padding: 7px 9px;
+
+    font-size: 0;
   }
 
-  .app-main {
-    width: calc(100% - 32px);
-    padding: 30px 0 45px;
+  .signout-button svg {
+    width: 17px;
+    height: 17px;
   }
 
-  .tabs {
-    width: 100%;
+  .hc-sidebar {
+    gap: 8px;
+    padding: 10px 11px;
   }
 
-  .tab-button {
-    flex: 1;
-    padding-inline: 10px;
+  .hc-sidebar__brand {
+    gap: 8px;
+  }
+
+  .hc-sidebar__brand-mark {
+    width: 32px;
+    height: 32px;
+  }
+
+  .hc-sidebar__brand-name {
+    font-size: 13px;
+  }
+
+  .hc-sidebar__brand-meta {
+    font-size: 7px;
+  }
+
+  .hc-sidebar__nav-item {
+    gap: 7px;
+    padding: 7px 8px;
+  }
+
+  .hc-sidebar__nav-label {
+    font-size: 9px;
+  }
+
+  .hc-topbar {
+    padding-inline: 13px;
+  }
+
+  .hc-main {
+    padding: 21px 13px 32px;
+  }
+
+  .hc-page-heading__topline {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .hc-environment-label {
+    min-height: 27px;
+    font-size: 9px;
   }
 
   .content-panel {
-    padding: 20px 16px;
+    padding: 18px 14px;
+  }
+
+  .section-title {
+    font-size: 15px;
+  }
+
+  .section-description {
+    font-size: 11px;
+  }
+
+  .hc-parameter-heading {
+    gap: 9px;
+  }
+
+  .hc-parameter-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .hc-parameter-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .hc-health-result-card {
+    padding: 15px;
+  }
+
+  .hc-health-result-grid {
+    gap: 9px;
+  }
+
+  .hc-health-metric {
+    padding: 11px;
+  }
+
+  .hc-health-metric__value {
+    font-size: 26px;
+  }
+
+  .hc-health-metric__label {
+    font-size: 9px;
+  }
+
+  .hc-shared-controls__actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .hc-reset-button,
+  .hc-apply-button {
+    width: 100%;
+    flex: none;
+  }
+
+  .hc-confirmation-modal {
+    padding: 21px 17px;
+  }
+
+  .hc-modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .hc-modal-actions button {
+    width: 100%;
+  }
+
+  .hc-machine-wear__scale {
+    font-size: 9px;
   }
 }
 
 
-/* =========================================
-   14. ACCESSIBILITY AND MOTION
-========================================= */
+/* =====================================================
+   26. ACCESSIBILITY AND REDUCED MOTION
+===================================================== */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -880,483 +2189,92 @@ button:disabled {
     transition-duration: 0.01ms !important;
   }
 }
+/* =====================================================
+   27. TWO INDEPENDENT PACKAGING LINE NAVIGATION
+===================================================== */
 
-
-/* =========================================
-   15. ANIMATED AUTOPACK BACKGROUND
-   Inspired by Customer Website PromoCarousel
-========================================= */
-
-/* Light theme animation colours */
-
-:root {
-  --ambient-orange: rgba(255, 133, 0, 0.20);
-  --ambient-blue: rgba(37, 139, 255, 0.18);
-  --ambient-green: rgba(34, 230, 107, 0.15);
-
-  --ambient-ring: rgba(37, 139, 255, 0.23);
-  --ambient-ring-soft: rgba(255, 133, 0, 0.18);
+.hc-sidebar__nav-button {
+  display: flex;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  cursor: pointer;
 }
 
-/* Dark theme animation colours */
-
-:root[data-theme="dark"] {
-  --ambient-orange: rgba(255, 133, 0, 0.27);
-  --ambient-blue: rgba(37, 139, 255, 0.26);
-  --ambient-green: rgba(34, 230, 107, 0.19);
-
-  --ambient-ring: rgba(96, 165, 250, 0.27);
-  --ambient-ring-soft: rgba(255, 161, 61, 0.21);
+.hc-sidebar__nav-button:hover:not(.hc-sidebar__nav-item--active) {
+  color: var(--text-primary);
+  background: var(--surface-hover);
+  border-color: var(--border);
 }
 
+.hc-sidebar__nav-button:focus-visible {
+  outline: 2px solid var(--brand-blue);
+  outline-offset: 2px;
+}
 
-/* =========================================
-   15A. MOVING GRADIENT BACKGROUND
-========================================= */
+.hc-topbar__line {
+  color: var(--brand-blue);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.7px;
+  white-space: nowrap;
+}
 
-body::before {
-  content: "";
+/* Keep both line instances mounted, but show only the selected one. */
 
-  position: fixed;
-  inset: -18%;
-  z-index: -1;
+.hc-line-view {
+  width: 100%;
+  min-width: 0;
+}
 
-  pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at 18% 25%,
-      var(--ambient-orange) 0%,
-      transparent 29%
-    ),
-    radial-gradient(
-      ellipse at 78% 22%,
-      var(--ambient-blue) 0%,
-      transparent 30%
-    ),
-    radial-gradient(
-      ellipse at 74% 78%,
-      var(--ambient-green) 0%,
-      transparent 27%
-    ),
-    radial-gradient(
-      ellipse at 28% 80%,
-      rgba(255, 224, 51, 0.12) 0%,
-      transparent 24%
-    );
-
-  filter: blur(24px);
-  opacity: 1;
-
-  will-change: transform;
-
-  animation:
-    autopackAmbientDrift 20s ease-in-out infinite alternate,
-    autopackAmbientPulse 12s ease-in-out infinite;
+.hc-line-view[hidden] {
+  display: none !important;
 }
 
 
-/* =========================================
-   15B. ROTATING RINGS
-   No dot texture or particle pattern
-========================================= */
+/* =====================================================
+   28. TWO-LINE NAVIGATION — MOBILE
+===================================================== */
 
-body::after {
-  content: "";
-
-  position: fixed;
-  inset: -12%;
-  z-index: -1;
-
-  pointer-events: none;
-
-  background-image:
-
-    radial-gradient(
-      circle at 78% 34%,
-      transparent 0 120px,
-      var(--ambient-ring) 121px 122px,
-      transparent 124px
-    ),
-
-    radial-gradient(
-      circle at 78% 34%,
-      transparent 0 168px,
-      var(--ambient-ring-soft) 169px 170px,
-      transparent 172px
-    ),
-
-    radial-gradient(
-      circle at 17% 76%,
-      transparent 0 72px,
-      var(--ambient-ring-soft) 73px 74px,
-      transparent 76px
-    );
-
-  background-size: 100% 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-
-  opacity: 0.65;
-
-  transform-origin: center;
-
-  will-change: transform;
-
-  animation: autopackAmbientRotate 65s linear infinite;
-}
-
-
-/* =========================================
-   15C. FLOATING GEOMETRIC BACKGROUND SHAPES
-========================================= */
-
-.ambient-decoration {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-
-  overflow: hidden;
-  pointer-events: none;
-}
-
-/* Floating glowing orbs */
-
-.ambient-orb {
-  position: absolute;
-  border-radius: 50%;
-  pointer-events: none;
-  will-change: transform;
-}
-
-.ambient-orb--orange {
-  width: 250px;
-  height: 250px;
-  top: 8%;
-  right: 12%;
-
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      rgba(255, 224, 51, 0.48),
-      var(--ambient-orange) 43%,
-      transparent 72%
-    );
-
-  opacity: 0.82;
-
-  animation: autopackFloatOne 13s ease-in-out infinite;
-}
-
-.ambient-orb--blue {
-  width: 210px;
-  height: 210px;
-  left: 5%;
-  bottom: 8%;
-
-  background:
-    radial-gradient(
-      circle at 40% 35%,
-      rgba(37, 139, 255, 0.36),
-      var(--ambient-blue) 42%,
-      transparent 74%
-    );
-
-  opacity: 0.82;
-
-  animation: autopackFloatTwo 16s ease-in-out infinite;
-}
-
-/* Green orb replaces the former pink orb. */
-
-.ambient-orb--green {
-  width: 155px;
-  height: 155px;
-  right: 7%;
-  bottom: 15%;
-
-  background:
-    radial-gradient(
-      circle at 35% 30%,
-      rgba(34, 230, 107, 0.52),
-      var(--ambient-green) 45%,
-      transparent 75%
-    );
-
-  opacity: 0.78;
-
-  animation: autopackFloatThree 11s ease-in-out infinite;
-}
-
-
-/* =========================================
-   15D. FLOATING OUTLINE RINGS
-========================================= */
-
-.ambient-ring {
-  position: absolute;
-
-  border: 1px solid var(--ambient-ring);
-  border-radius: 50%;
-
-  pointer-events: none;
-  opacity: 0.42;
-}
-
-.ambient-ring--one {
-  width: 280px;
-  height: 280px;
-  right: -65px;
-  top: 14%;
-
-  animation: autopackRingRotate 32s linear infinite;
-}
-
-.ambient-ring--two {
-  width: 185px;
-  height: 185px;
-  right: -18px;
-  top: 21%;
-
-  border-width: 2px;
-  opacity: 0.30;
-
-  animation: autopackRingRotate 24s linear infinite reverse;
-}
-
-.ambient-ring--three {
-  width: 180px;
-  height: 180px;
-  left: -70px;
-  bottom: 10%;
-
-  border-color: var(--ambient-ring-soft);
-
-  animation: autopackRingRotate 38s linear infinite;
-}
-
-
-/* =========================================
-   15E. GEOMETRIC SHAPES
-========================================= */
-
-.ambient-shape {
-  position: absolute;
-
-  border: 1px solid var(--ambient-ring);
-  border-radius: 22px;
-
-  pointer-events: none;
-  opacity: 0.25;
-
-  will-change: transform;
-}
-
-.ambient-shape--one {
-  width: 95px;
-  height: 95px;
-
-  right: 32%;
-  top: 20%;
-
-  transform: rotate(35deg);
-
-  animation: autopackShapeFloat 15s ease-in-out infinite;
-}
-
-.ambient-shape--two {
-  width: 58px;
-  height: 58px;
-
-  right: 17%;
-  bottom: 15%;
-
-  border-color: var(--ambient-ring-soft);
-
-  transform: rotate(45deg);
-
-  animation: autopackShapeFloat 12s ease-in-out infinite reverse;
-}
-
-
-/* =========================================
-   15F. ANIMATION KEYFRAMES
-========================================= */
-
-@keyframes autopackAmbientDrift {
-  0% {
-    transform: translate3d(-1.5%, -1%, 0) scale(1);
+@media (max-width: 700px) {
+  .hc-sidebar__navigation {
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
   }
 
-  50% {
-    transform: translate3d(1.5%, 1%, 0) scale(1.035);
+  .hc-sidebar__nav-button {
+    width: auto;
+    min-width: 0;
+    justify-content: center;
   }
 
-  100% {
-    transform: translate3d(-1%, 2%, 0) scale(1.015);
+  .hc-sidebar__nav-label {
+    white-space: nowrap;
   }
 }
 
-@keyframes autopackAmbientPulse {
-  0%, 100% {
-    opacity: 0.85;
+@media (max-width: 480px) {
+  .hc-sidebar__navigation {
+    gap: 4px;
   }
 
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes autopackAmbientRotate {
-  from {
-    transform: rotate(0deg);
+  .hc-sidebar__nav-button {
+    gap: 5px;
+    padding: 7px 7px;
   }
 
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes autopackFloatOne {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
+  .hc-sidebar__nav-icon,
+  .hc-sidebar__nav-icon svg {
+    width: 14px;
+    height: 14px;
   }
 
-  50% {
-    transform: translate(-20px, 25px) scale(1.1);
-  }
-}
-
-@keyframes autopackFloatTwo {
-  0%, 100% {
-    transform: translate(0, 0);
+  .hc-sidebar__nav-label {
+    font-size: 9px;
   }
 
-  50% {
-    transform: translate(25px, -25px);
-  }
-}
-
-@keyframes autopackFloatThree {
-  0%, 100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-22px);
-  }
-}
-
-@keyframes autopackRingRotate {
-  from {
-    rotate: 0deg;
-  }
-
-  to {
-    rotate: 360deg;
-  }
-}
-
-@keyframes autopackShapeFloat {
-  0%, 100% {
-    translate: 0 0;
-  }
-
-  50% {
-    translate: 0 -18px;
-  }
-}
-
-
-/* =========================================
-   15G. DARK THEME REFINEMENTS
-========================================= */
-
-:root[data-theme="dark"] body::before {
-  filter: blur(30px);
-  opacity: 1;
-}
-
-:root[data-theme="dark"] body::after {
-  opacity: 0.78;
-}
-
-:root[data-theme="dark"] .ambient-orb--orange {
-  opacity: 0.92;
-}
-
-:root[data-theme="dark"] .ambient-orb--blue {
-  opacity: 0.92;
-}
-
-:root[data-theme="dark"] .ambient-orb--green {
-  opacity: 0.88;
-}
-
-:root[data-theme="dark"] .ambient-ring,
-:root[data-theme="dark"] .ambient-shape {
-  opacity: 0.34;
-}
-
-
-/* =========================================
-   15H. RESPONSIVE ANIMATED BACKGROUND
-========================================= */
-
-@media (max-width: 640px) {
-  body::before {
-    inset: -25%;
-    filter: blur(30px);
-  }
-
-  body::after {
-    inset: -18%;
-    opacity: 0.48;
-  }
-
-  .ambient-orb--orange {
-    width: 180px;
-    height: 180px;
-  }
-
-  .ambient-orb--blue {
-    width: 150px;
-    height: 150px;
-  }
-
-  .ambient-orb--green {
-    width: 110px;
-    height: 110px;
-  }
-
-  .ambient-ring--one {
-    right: -110px;
-  }
-
-  .ambient-ring--two {
-    right: -65px;
-  }
-
-  .ambient-shape {
-    opacity: 0.16;
-  }
-
-  :root[data-theme="dark"] body::after {
-    opacity: 0.58;
-  }
-}
-
-
-/* =========================================
-   15I. ACCESSIBILITY — REDUCED MOTION
-========================================= */
-
-@media (prefers-reduced-motion: reduce) {
-  body::before,
-  body::after,
-  .ambient-decoration *,
-  .ambient-decoration {
-    animation: none !important;
-    transition: none !important;
+  .hc-topbar__line {
+    font-size: 9px;
   }
 }

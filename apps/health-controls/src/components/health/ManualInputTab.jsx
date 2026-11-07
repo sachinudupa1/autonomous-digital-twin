@@ -6,7 +6,7 @@ import SharedControls from './SharedControls';
 import ConfirmationModal from './ConfirmationModal';
 import { PARAMETER_CONFIG, NORMAL_VALUES } from '../../config/constants';
 
-function ManualInputTab() {
+function ManualInputTab({ lineId }) {
   const [values, setValues] = useState({
     temperature: '',
     vibration: '',
@@ -14,16 +14,14 @@ function ManualInputTab() {
     machineWear: 0,
   });
 
-  // These will be populated by healthService.calculateHealth()
-  // once Teammate 5's health calculation is integrated.
+  // These will be populated by the health calculation service.
   const [healthScore, setHealthScore] = useState(null);
   const [healthClassification, setHealthClassification] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
   const [isApplying, setIsApplying] = useState(false);
 
-  // Populated after a successful apply; shown as source + timestamp.
-  // The setter will be added when healthService.applyConditions() is wired.
+  // Populated after a successful apply once the service is integrated.
   const [lastApplied] = useState(null);
 
   const handleChange = (field) => (value) => {
@@ -35,9 +33,9 @@ function ManualInputTab() {
     setValues(updatedValues);
 
     // Integration point:
-    // const result = healthService.calculateHealth(updatedValues);
-    // setHealthScore(result.score);
-    // setHealthClassification(result.classification);
+    // Include lineId when requesting a health calculation.
+    // Example payload: { lineId, values: updatedValues }
+    // Update healthScore and healthClassification from the service response.
 
     void setHealthScore;
     void setHealthClassification;
@@ -66,20 +64,17 @@ function ManualInputTab() {
 
     try {
       // Integration point:
-      // const result = await healthService.applyConditions(values, 'manual');
-      // setLastApplied({
-      //   source: 'Manual Input',
-      //   timestamp: result.timestamp,
-      // });
+      // Send the selected lineId with the conditions.
+      // Example payload: { lineId, source: 'manual', values }
 
       console.warn(
-        '[ManualInputTab] Apply Conditions is awaiting health service integration.'
+        `[ManualInputTab] Apply Conditions for ${lineId} is awaiting health service integration.`
       );
 
       setShowModal(false);
     } catch (error) {
       console.error(
-        '[ManualInputTab] Failed to apply conditions:',
+        `[ManualInputTab] Failed to apply conditions to ${lineId}:`,
         error
       );
     } finally {
@@ -92,13 +87,12 @@ function ManualInputTab() {
   };
 
   return (
-    <div className="content-panel">
-      {/* Section heading */}
+    <div className="content-panel" data-line-id={lineId}>
       <div className="section-heading">
         <h3 className="section-title">Manual Condition Entry</h3>
 
         <p className="section-description">
-          Enter the simulated operating conditions for the packaging line.
+          Enter the simulated operating conditions for this packaging line.
           The health result will be calculated using the configured health
           assessment logic.
         </p>
@@ -134,7 +128,7 @@ function ManualInputTab() {
       </div>
 
       {/* Calculated health result */}
-      <div style={{ marginTop: '30px' }}>
+      <div className="hc-health-result">
         <HealthResult
           score={healthScore}
           classification={healthClassification}
@@ -143,7 +137,7 @@ function ManualInputTab() {
 
       {/* Last successfully applied conditions */}
       {lastApplied && (
-        <p className="form-hint" style={{ marginTop: '17px' }}>
+        <p className="form-hint hc-last-applied">
           <strong>Source:</strong> {lastApplied.source}
           {' · '}
           <strong>Last applied:</strong>{' '}
@@ -152,7 +146,7 @@ function ManualInputTab() {
       )}
 
       {/* Reset and apply controls */}
-      <div style={{ marginTop: '28px' }}>
+      <div className="hc-shared-controls">
         <SharedControls
           onReset={handleReset}
           onApply={handleApply}

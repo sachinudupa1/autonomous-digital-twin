@@ -1,122 +1,137 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { useState } from 'react';
+import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import LoginPage from './pages/LoginPage';
+import DashboardLayout from './components/layout/DashboardLayout';
+
+import OverviewPage from './pages/OverviewPage';
+import ProductionMonitoringPage from './pages/ProductionMonitoringPage';
+import MachineHealthPage from './pages/MachineHealthPage';
+import AIAgentsPage from './pages/AIAgentsPage';
+import DigitalTwinPage from './pages/DigitalTwinPage';
+import DecisionReportsPage from './pages/DecisionReportsPage';
+import LogsHistoryPage from './pages/LogsHistoryPage';
+
+import './App.css';
+
+/**
+ * Main dashboard routing and session state container.
+ */
+function DashboardAppContent() {
+  const { isAuthenticated, isAuthLoading } = useAuth();
+  const [activePage, setActivePage] = useState('overview');
+  const [machineHealthInitialTab, setMachineHealthInitialTab] = useState('line-a');
+
+  /**
+   * Overview navigation can optionally specify which production
+   * line should be selected when opening Machine Health.
+   */
+  const handleOverviewNavigate = (pageId, lineName) => {
+    if (pageId === 'machine-health') {
+      const normalizedLine = String(lineName || 'line-a')
+        .trim()
+        .toLowerCase()
+        .replaceAll(' ', '-');
+
+      setMachineHealthInitialTab(
+        normalizedLine === 'line-b' ? 'line-b' : 'line-a'
+      );
+    }
+
+    setActivePage(pageId);
+  };
+
+  // Loading indicator while Firebase checks initial authentication state
+  if (isAuthLoading) {
+    return (
+      <main className="login-page">
+        <section
+          className="login-card"
+          style={{
+            width: '100%',
+            maxWidth: '360px',
+            textAlign: 'center',
+          }}
+        >
+          <div className="brand-mark" style={{ margin: '0 auto 18px' }}>
+            <span style={{ fontSize: '25px', fontWeight: 700 }}>A</span>
+          </div>
+
+          <h1 className="login-brand__name">AutoPack</h1>
+
+          <p className="login-brand__subtitle" style={{ marginTop: '12px' }}>
+            Checking administrator session...
+          </p>
+        </section>
+      </main>
+    );
+  }
+
+  // Unauthenticated users are redirected to administrator login
+  if (!isAuthenticated) {
+    return <LoginPage />;
+  }
+
+  // Render active section based on sidebar selection
+  const renderActivePage = () => {
+    switch (activePage) {
+      case 'overview':
+        return (
+          <OverviewPage
+            onNavigate={handleOverviewNavigate}
+          />
+        );
+
+      case 'production-monitoring':
+        return <ProductionMonitoringPage />;
+
+      case 'machine-health':
+        return (
+          <MachineHealthPage
+            initialTab={machineHealthInitialTab}
+          />
+        );
+
+      case 'ai-agents':
+        return <AIAgentsPage />;
+
+      case 'digital-twin':
+        return <DigitalTwinPage />;
+
+      case 'decision-reports':
+        return <DecisionReportsPage />;
+
+      case 'logs-history':
+        return <LogsHistoryPage />;
+
+      default:
+        return (
+          <OverviewPage
+            onNavigate={handleOverviewNavigate}
+          />
+        );
+    }
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+    <DashboardLayout
+      activePage={activePage}
+      onNavigate={setActivePage}
+    >
+      {renderActivePage()}
+    </DashboardLayout>
+  );
 }
 
-export default App
+function App() {
+  return (
+    <ThemeProvider>
+      <AuthProvider>
+        <DashboardAppContent />
+      </AuthProvider>
+    </ThemeProvider>
+  );
+}
+
+export default App;

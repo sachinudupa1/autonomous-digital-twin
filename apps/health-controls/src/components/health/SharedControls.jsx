@@ -1,25 +1,11 @@
 function SharedControls({ onReset, onApply, isApplying = false }) {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        gap: '12px',
-        paddingTop: '22px',
-        borderTop: '1px solid var(--border)',
-      }}
-    >
+    <div className="hc-shared-controls__actions">
       <button
         type="button"
         onClick={onReset}
         disabled={isApplying}
-        className="secondary-button"
-        style={{
-          flex: '1 1 150px',
-          minHeight: '45px',
-        }}
+        className="secondary-button hc-reset-button"
       >
         <svg
           width="16"
@@ -51,11 +37,7 @@ function SharedControls({ onReset, onApply, isApplying = false }) {
         type="button"
         onClick={onApply}
         disabled={isApplying}
-        className="primary-button"
-        style={{
-          flex: '1 1 180px',
-          minHeight: '45px',
-        }}
+        className="primary-button hc-apply-button"
       >
         {isApplying ? (
           'Applying...'

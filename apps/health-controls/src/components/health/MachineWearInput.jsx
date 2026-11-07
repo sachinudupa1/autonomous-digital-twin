@@ -4,8 +4,8 @@ function MachineWearInput({ value, onChange, readOnly = false }) {
       ? 0
       : Number(value);
 
-  // Keep the slider within its visual range without changing the
-  // actual entered value in the parent component.
+  // Keep the slider within its visual range without changing
+  // the actual entered value in the parent component.
   const sliderValue = Number.isFinite(numericValue)
     ? Math.min(100, Math.max(0, numericValue))
     : 0;
@@ -23,29 +23,12 @@ function MachineWearInput({ value, onChange, readOnly = false }) {
   };
 
   return (
-    <div className="form-field">
+    <div className="form-field hc-parameter-field hc-machine-wear">
       {/* Machine Wear label and outline illustration */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '11px',
-        }}
-      >
+      <div className="hc-parameter-heading">
         <div
+          className="hc-parameter-icon hc-parameter-icon--wear"
           aria-hidden="true"
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: '38px',
-            height: '38px',
-            flexShrink: 0,
-            color: '#FF7900',
-            background: 'var(--surface-hover)',
-            border: '1px solid var(--border)',
-            borderRadius: '11px',
-          }}
         >
           <svg
             viewBox="0 0 24 24"
@@ -64,25 +47,13 @@ function MachineWearInput({ value, onChange, readOnly = false }) {
           </svg>
         </div>
 
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '3px',
-          }}
-        >
+        <div className="hc-parameter-copy">
           <label
             htmlFor="machine-wear-number"
             className="form-label"
           >
             Machine Wear
-            <span
-              style={{
-                marginLeft: '6px',
-                color: 'var(--text-secondary)',
-                fontWeight: 400,
-              }}
-            >
+            <span className="hc-machine-wear__range-label">
               (0–100%)
             </span>
           </label>
@@ -94,48 +65,30 @@ function MachineWearInput({ value, onChange, readOnly = false }) {
       </div>
 
       {/* Number input and percentage */}
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
-        }}
-      >
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <input
-            id="machine-wear-number"
-            type="number"
-            inputMode="numeric"
-            min={0}
-            max={100}
-            step={1}
-            value={value ?? ''}
-            onChange={handleNumberChange}
-            readOnly={readOnly}
-            placeholder="0"
-            className="form-input"
-            aria-label="Machine Wear percentage"
-            aria-describedby="machine-wear-range"
-            style={{
-              textAlign: 'center',
-              cursor: readOnly ? 'default' : 'text',
-            }}
-          />
-        </div>
+      <div className="hc-machine-wear__number-row">
+        <input
+          id="machine-wear-number"
+          type="number"
+          inputMode="numeric"
+          min={0}
+          max={100}
+          step={1}
+          value={value ?? ''}
+          onChange={handleNumberChange}
+          readOnly={readOnly}
+          placeholder="0"
+          className={`form-input hc-parameter-input hc-machine-wear__number ${
+            readOnly ? 'hc-parameter-input--readonly' : ''
+          }`}
+          aria-label="Machine Wear percentage"
+          aria-describedby="machine-wear-range"
+        />
 
-        <span
-          style={{
-            color: 'var(--text-secondary)',
-            fontSize: '14px',
-            fontWeight: 600,
-          }}
-        >
-          %
-        </span>
+        <span className="hc-machine-wear__unit">%</span>
       </div>
 
       {/* Slider */}
-      <div style={{ marginTop: '3px' }}>
+      <div className="hc-machine-wear__slider-wrap">
         <input
           type="range"
           min={0}
@@ -146,21 +99,12 @@ function MachineWearInput({ value, onChange, readOnly = false }) {
           disabled={readOnly}
           aria-label="Machine Wear slider"
           aria-valuetext={`${sliderValue}%`}
-          style={{
-            width: '100%',
-            accentColor: 'var(--accent)',
-            cursor: readOnly ? 'default' : 'pointer',
-          }}
+          className="hc-machine-wear__slider"
         />
 
         <div
           id="machine-wear-range"
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            color: 'var(--text-muted)',
-            fontSize: '11px',
-          }}
+          className="hc-machine-wear__scale"
         >
           <span>0% · New</span>
           <span>100% · Fully worn</span>
