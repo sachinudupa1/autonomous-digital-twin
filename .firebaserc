@@ -1,0 +1,21 @@
+{
+  "projects": {
+    "default": "autonomous-digital-twin"
+  },
+  "targets": {
+    "autonomous-digital-twin": {
+      "hosting": {
+        "customer": [
+          "autopack-customer-website"
+        ],
+        "dashboard": [
+          "autopack-dashboard"
+        ],
+        "health-controls": [
+          "autopack-health-controls"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}
