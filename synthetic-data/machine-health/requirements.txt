@@ -1,6 +1,0 @@
-numpy
-pydantic>=2,<3
-PyYAML
-pandas
-pytest
-pytest-cov
