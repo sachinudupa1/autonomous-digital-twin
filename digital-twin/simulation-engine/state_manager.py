@@ -185,7 +185,6 @@ class DigitalTwinStateManager:
         )
 
         state.active_box = snapshot["active_box"]
-        state.last_error = None
         state.last_updated = utc_now()
 
         return self.get_scene_state(scene_id)

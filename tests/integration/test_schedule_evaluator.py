@@ -309,6 +309,7 @@ def test_runner_failure_is_recorded_and_scene_cleanup_still_runs():
     state = manager.get_scene_state(SCENE_ID)
 
     assert state["run_status"] == "failed"
+    assert state["last_error"] == "Mock execution failure."
     assert state["completed_runs"] == 0
     assert state["active_schedule_id"] is None
     assert state["active_run_purpose"] is None
@@ -499,3 +500,30 @@ def test_successful_evaluation_keeps_main_agent_as_selection_authority():
     assert report["selection_authority"] == "main_agent"
     assert "winner" not in report
     assert "selected_proposal" not in report
+
+
+def test_new_run_clears_previous_error():
+    evaluator, manager, runner = make_schedule_evaluator(
+        run_error="Previous execution failure."
+    )
+
+    evaluator.evaluate_candidates([
+        make_candidate()
+    ])
+
+    failed_state = manager.get_scene_state(SCENE_ID)
+    assert failed_state["last_error"] == "Previous execution failure."
+
+    manager.begin_run(
+        SCENE_ID,
+        "candidate_002",
+        "candidate",
+    )
+
+    active_state = manager.get_scene_state(SCENE_ID)
+
+    assert active_state["last_error"] is None
+    assert active_state["active_schedule_id"] == "candidate_002"
+    assert active_state["run_status"] == "evaluating"
+
+    manager.fail_run(SCENE_ID, "Test cleanup.")
