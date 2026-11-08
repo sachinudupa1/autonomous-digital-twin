@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "agent_id": "rule_based_agent",
+  "agent_type": "rule_based",
+  "proposal_id": "RULE-PROP-003",
+  "input_state_id": "STATE-003",
+  "input_state_version": 1,
+  "schedule": {
+    "order_sequence": [
+      "ORDER-003",
+      "ORDER-002",
+      "ORDER-001"
+    ]
+  },
+  "confidence": null,
+  "rule_config_version": "rules-v1-dev",
+  "explanation": "Ranked 3 eligible order(s) using: rush priority, deadline urgency, least slack (where an estimate exists), waiting time, health awareness (flags only); ties broken deterministically (earlier deadline, longer wait, earlier arrival, Order ID).\nUNCERTAIN proposal: machine_health_missing.\n1. ORDER-003: highest-ranked under the configured rules: it is a rush order; its deadline is 1800s after the state snapshot; its slack is 1560s; it has waited 900s.\n2. ORDER-002: ranked after ORDER-003 because ORDER-003 is a rush order, whereas ORDER-002 is a normal order.\n3. ORDER-001: ranked after ORDER-002 because ORDER-002 has a requested deadline but ORDER-001 has none.",
+  "created_at_utc": "2026-11-03T12:00:00Z",
+  "metadata": {
+    "uncertain": true,
+    "uncertainty_reasons": [
+      "machine_health_missing"
+    ],
+    "health_considered": {
+      "considered": true,
+      "availability": null,
+      "health_category": null,
+      "slowdown_factor_applied": 1.0,
+      "flags": [
+        "health_information_missing"
+      ]
+    },
+    "excluded_orders": [],
+    "order_details": [
+      {
+        "order_id": "ORDER-003",
+        "position": 1,
+        "order_type": "rush",
+        "priority_tier": "rush",
+        "waiting_seconds": 900.0,
+        "time_remaining_seconds": 1800.0,
+        "slack_seconds": 1560.0,
+        "flags": [],
+        "reason": "highest-ranked under the configured rules: it is a rush order; its deadline is 1800s after the state snapshot; its slack is 1560s; it has waited 900s"
+      },
+      {
+        "order_id": "ORDER-002",
+        "position": 2,
+        "order_type": "normal",
+        "priority_tier": "normal",
+        "waiting_seconds": 1800.0,
+        "time_remaining_seconds": 14400.0,
+        "slack_seconds": 14220.0,
+        "flags": [],
+        "reason": "ranked after ORDER-003 because ORDER-003 is a rush order, whereas ORDER-002 is a normal order"
+      },
+      {
+        "order_id": "ORDER-001",
+        "position": 3,
+        "order_type": "normal",
+        "priority_tier": "normal",
+        "waiting_seconds": 3600.0,
+        "time_remaining_seconds": null,
+        "slack_seconds": null,
+        "flags": [],
+        "reason": "ranked after ORDER-002 because ORDER-002 has a requested deadline but ORDER-001 has none"
+      }
+    ],
+    "reference_time_utc": "2026-11-03T12:00:00Z",
+    "config_approval_status": "development_defaults_unapproved"
+  }
+}

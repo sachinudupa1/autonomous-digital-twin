@@ -1,0 +1,18 @@
+{
+  "source": "manual",
+  "mode": "sensor_input",
+  "readings": {
+    "temperature": {
+      "value": 45,
+      "unit": "C"
+    },
+    "vibration": {
+      "value": 2.0,
+      "unit": "configured_unit"
+    }
+  },
+  "operating_duration": {
+    "value": 120,
+    "unit": "minutes"
+  }
+}

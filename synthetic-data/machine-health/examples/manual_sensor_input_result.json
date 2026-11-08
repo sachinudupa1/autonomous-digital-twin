@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "MANUAL-EXAMPLE",
+  "source": "manual",
+  "health_source": "calculated",
+  "mode": "sensor_input",
+  "readings": {
+    "temperature": {
+      "value": 45.0,
+      "unit": "C"
+    },
+    "vibration": {
+      "value": 2.0,
+      "unit": "configured_unit"
+    },
+    "operating_duration": {
+      "value": 120.0,
+      "unit": "minutes"
+    }
+  },
+  "health_result": {
+    "health_score": 93.75,
+    "health_category": "normal",
+    "calculation": {
+      "temperature_risk": 0.125,
+      "vibration_risk": 0.0,
+      "operating_duration_risk": 0.0,
+      "combined_risk": 0.0625,
+      "weights": {
+        "temperature": 0.5,
+        "vibration": 0.3,
+        "operating_duration": 0.2
+      },
+      "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+    }
+  },
+  "availability": "available",
+  "scenario_type": "manual",
+  "random_seed": null,
+  "step": null,
+  "generator_version": "health-generator-v1",
+  "config_version": "health-config-dev-1",
+  "thresholds_status": "development_defaults_unapproved",
+  "created_at_utc": "2026-11-03T12:00:00Z"
+}
