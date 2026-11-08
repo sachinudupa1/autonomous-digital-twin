@@ -1,0 +1,16 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "packaging-rule-agent"
+version = "0.1.0"
+description = "Rule-Based Packaging Scheduling Agent"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "pydantic>=2,<3",
+    "PyYAML"
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

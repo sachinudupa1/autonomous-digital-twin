@@ -1,0 +1,227 @@
+[
+  {
+    "schema_version": "1.0",
+    "scenario_id": "SCEN-INCREASING_TEMPERATURE-42-S000",
+    "source": "synthetic",
+    "health_source": "calculated",
+    "mode": "sensor_input",
+    "readings": {
+      "temperature": {
+        "value": 40.39,
+        "unit": "C"
+      },
+      "vibration": {
+        "value": 1.878,
+        "unit": "configured_unit"
+      },
+      "operating_duration": {
+        "value": 261.8,
+        "unit": "minutes"
+      }
+    },
+    "health_result": {
+      "health_score": 98.91,
+      "health_category": "normal",
+      "calculation": {
+        "temperature_risk": 0.0098,
+        "vibration_risk": 0.0,
+        "operating_duration_risk": 0.0303,
+        "combined_risk": 0.0109,
+        "weights": {
+          "temperature": 0.5,
+          "vibration": 0.3,
+          "operating_duration": 0.2
+        },
+        "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+      }
+    },
+    "availability": "available",
+    "scenario_type": "increasing_temperature",
+    "random_seed": 42,
+    "step": 0,
+    "generator_version": "health-generator-v1",
+    "config_version": "health-config-dev-1",
+    "thresholds_status": "development_defaults_unapproved",
+    "created_at_utc": "2026-11-03T12:00:00Z"
+  },
+  {
+    "schema_version": "1.0",
+    "scenario_id": "SCEN-INCREASING_TEMPERATURE-42-S001",
+    "source": "synthetic",
+    "health_source": "calculated",
+    "mode": "sensor_input",
+    "readings": {
+      "temperature": {
+        "value": 45.27,
+        "unit": "C"
+      },
+      "vibration": {
+        "value": 1.492,
+        "unit": "configured_unit"
+      },
+      "operating_duration": {
+        "value": 139.2,
+        "unit": "minutes"
+      }
+    },
+    "health_result": {
+      "health_score": 93.41,
+      "health_category": "normal",
+      "calculation": {
+        "temperature_risk": 0.1318,
+        "vibration_risk": 0.0,
+        "operating_duration_risk": 0.0,
+        "combined_risk": 0.0659,
+        "weights": {
+          "temperature": 0.5,
+          "vibration": 0.3,
+          "operating_duration": 0.2
+        },
+        "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+      }
+    },
+    "availability": "available",
+    "scenario_type": "increasing_temperature",
+    "random_seed": 42,
+    "step": 1,
+    "generator_version": "health-generator-v1",
+    "config_version": "health-config-dev-1",
+    "thresholds_status": "development_defaults_unapproved",
+    "created_at_utc": "2026-11-03T12:00:00Z"
+  },
+  {
+    "schema_version": "1.0",
+    "scenario_id": "SCEN-INCREASING_TEMPERATURE-42-S002",
+    "source": "synthetic",
+    "health_source": "calculated",
+    "mode": "sensor_input",
+    "readings": {
+      "temperature": {
+        "value": 49.64,
+        "unit": "C"
+      },
+      "vibration": {
+        "value": 2.904,
+        "unit": "configured_unit"
+      },
+      "operating_duration": {
+        "value": 55.1,
+        "unit": "minutes"
+      }
+    },
+    "health_result": {
+      "health_score": 84.56,
+      "health_category": "normal",
+      "calculation": {
+        "temperature_risk": 0.241,
+        "vibration_risk": 0.113,
+        "operating_duration_risk": 0.0,
+        "combined_risk": 0.1544,
+        "weights": {
+          "temperature": 0.5,
+          "vibration": 0.3,
+          "operating_duration": 0.2
+        },
+        "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+      }
+    },
+    "availability": "available",
+    "scenario_type": "increasing_temperature",
+    "random_seed": 42,
+    "step": 2,
+    "generator_version": "health-generator-v1",
+    "config_version": "health-config-dev-1",
+    "thresholds_status": "development_defaults_unapproved",
+    "created_at_utc": "2026-11-03T12:00:00Z"
+  },
+  {
+    "schema_version": "1.0",
+    "scenario_id": "SCEN-INCREASING_TEMPERATURE-42-S003",
+    "source": "synthetic",
+    "health_source": "calculated",
+    "mode": "sensor_input",
+    "readings": {
+      "temperature": {
+        "value": 55.2,
+        "unit": "C"
+      },
+      "vibration": {
+        "value": 2.114,
+        "unit": "configured_unit"
+      },
+      "operating_duration": {
+        "value": 262.1,
+        "unit": "minutes"
+      }
+    },
+    "health_result": {
+      "health_score": 79.96,
+      "health_category": "warning",
+      "calculation": {
+        "temperature_risk": 0.38,
+        "vibration_risk": 0.0142,
+        "operating_duration_risk": 0.0307,
+        "combined_risk": 0.2004,
+        "weights": {
+          "temperature": 0.5,
+          "vibration": 0.3,
+          "operating_duration": 0.2
+        },
+        "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+      }
+    },
+    "availability": "available",
+    "scenario_type": "increasing_temperature",
+    "random_seed": 42,
+    "step": 3,
+    "generator_version": "health-generator-v1",
+    "config_version": "health-config-dev-1",
+    "thresholds_status": "development_defaults_unapproved",
+    "created_at_utc": "2026-11-03T12:00:00Z"
+  },
+  {
+    "schema_version": "1.0",
+    "scenario_id": "SCEN-INCREASING_TEMPERATURE-42-S004",
+    "source": "synthetic",
+    "health_source": "calculated",
+    "mode": "sensor_input",
+    "readings": {
+      "temperature": {
+        "value": 59.01,
+        "unit": "C"
+      },
+      "vibration": {
+        "value": 1.524,
+        "unit": "configured_unit"
+      },
+      "operating_duration": {
+        "value": 296.5,
+        "unit": "minutes"
+      }
+    },
+    "health_result": {
+      "health_score": 74.67,
+      "health_category": "warning",
+      "calculation": {
+        "temperature_risk": 0.4752,
+        "vibration_risk": 0.0,
+        "operating_duration_risk": 0.0785,
+        "combined_risk": 0.2533,
+        "weights": {
+          "temperature": 0.5,
+          "vibration": 0.3,
+          "operating_duration": 0.2
+        },
+        "formula": "health_score = score_max * (1 - sum(weight_i * risk_i))"
+      }
+    },
+    "availability": "available",
+    "scenario_type": "increasing_temperature",
+    "random_seed": 42,
+    "step": 4,
+    "generator_version": "health-generator-v1",
+    "config_version": "health-config-dev-1",
+    "thresholds_status": "development_defaults_unapproved",
+    "created_at_utc": "2026-11-03T12:00:00Z"
+  }
+]

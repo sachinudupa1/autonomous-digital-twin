@@ -1,0 +1,44 @@
+# =====================================================================
+# DEVELOPMENT DEFAULTS - ASSUMPTIONS ONLY. Teammate 1 must approve.
+# Priority is a strict hierarchy (no numeric weights are invented):
+#   1 priority tier (rush, or normal order that waited too long)
+#   2 orders with a deadline before orders without one
+#   3 least slack (only where a processing estimate exists)
+#   4 least time remaining to deadline
+#   5 tie-breakers: longer waiting, earlier arrival, Order ID
+# =====================================================================
+rule_config_version: "rules-v1-dev"
+approval_status: "development_defaults_unapproved"
+
+rules:
+  rush_priority_enabled: true
+  deadline_urgency_enabled: true
+  slack_time_enabled: true
+  waiting_time_enabled: true
+  health_awareness_enabled: true
+
+tie_breaking:
+  earlier_deadline: true
+  longer_waiting_time: true
+  earlier_arrival: true
+  order_id: true            # always applied last so output is deterministic
+
+eligibility:
+  eligible_statuses: [queued, pending, waiting]   # everything else is excluded (and reported)
+
+waiting_time:
+  # A normal order that has waited at least this long is promoted into the
+  # rush tier (anti-starvation). null disables promotion. ASSUMPTION value.
+  starvation_promotion_seconds: 7200
+
+health_awareness:
+  on_missing_health: mark_uncertain
+  allowed_availability: [available, degraded, unavailable]
+  allowed_categories: [normal, warning, abnormal, critical]
+  # Multiplier applied to processing estimates when computing slack, per health
+  # category. null = no adjustment (nothing approved yet). Must be >= 1 if set.
+  slowdown_factor_by_category:
+    normal: null
+    warning: null
+    abnormal: null
+    critical: null
