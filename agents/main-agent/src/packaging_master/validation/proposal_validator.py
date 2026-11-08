@@ -15,10 +15,18 @@ def validate_proposal(proposal, state):
 
     schedule = proposal.get("schedule")
 
-    if not isinstance(schedule, list):
+    if not isinstance(schedule, dict):
         return False, "Invalid schedule"
 
-    if len(schedule) != len(set(schedule)):
+    order_sequence = schedule.get("order_sequence")
+
+    if not isinstance(order_sequence, list):
+        return False, "Invalid schedule"
+
+    if not all(isinstance(order_id, str) for order_id in order_sequence):
+        return False, "Invalid schedule"
+
+    if len(order_sequence) != len(set(order_sequence)):
         return False, "Duplicate order IDs"
 
     valid_orders = {
@@ -26,7 +34,7 @@ def validate_proposal(proposal, state):
         for order in state["orders"]
     }
 
-    if set(schedule) != valid_orders:
+    if set(order_sequence) != valid_orders:
         return False, "Missing or non-existent order IDs"
 
     return True, "Proposal is valid"

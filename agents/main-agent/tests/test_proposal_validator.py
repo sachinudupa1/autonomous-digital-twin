@@ -44,7 +44,27 @@ def test_incorrect_state_version():
 
 def test_invalid_schedule_type():
     proposal = copy.deepcopy(sample_proposals[0])
-    proposal["schedule"] = "ORDER-001"
+    proposal["schedule"] = ["ORDER-001", "ORDER-002"]
+
+    valid, message = validate_proposal(proposal, sample_state)
+
+    assert valid is False
+    assert message == "Invalid schedule"
+
+
+def test_missing_order_sequence():
+    proposal = copy.deepcopy(sample_proposals[0])
+    proposal["schedule"] = {}
+
+    valid, message = validate_proposal(proposal, sample_state)
+
+    assert valid is False
+    assert message == "Invalid schedule"
+
+
+def test_invalid_order_sequence_type():
+    proposal = copy.deepcopy(sample_proposals[0])
+    proposal["schedule"]["order_sequence"] = "ORDER-001"
 
     valid, message = validate_proposal(proposal, sample_state)
 
@@ -54,7 +74,7 @@ def test_invalid_schedule_type():
 
 def test_duplicate_order_ids():
     proposal = copy.deepcopy(sample_proposals[0])
-    proposal["schedule"] = [
+    proposal["schedule"]["order_sequence"] = [
         "ORDER-001",
         "ORDER-001",
         "ORDER-003",
@@ -68,7 +88,7 @@ def test_duplicate_order_ids():
 
 def test_missing_or_nonexistent_order_ids():
     proposal = copy.deepcopy(sample_proposals[0])
-    proposal["schedule"] = [
+    proposal["schedule"]["order_sequence"] = [
         "ORDER-001",
         "ORDER-002",
         "ORDER-999",
@@ -78,3 +98,13 @@ def test_missing_or_nonexistent_order_ids():
 
     assert valid is False
     assert message == "Missing or non-existent order IDs"
+
+
+def test_line_assignments_not_required():
+    proposal = copy.deepcopy(sample_proposals[0])
+    proposal.pop("line_assignments", None)
+
+    valid, message = validate_proposal(proposal, sample_state)
+
+    assert valid is True
+    assert message == "Proposal is valid"
