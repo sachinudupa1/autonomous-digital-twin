@@ -1,122 +1,115 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useState, useEffect } from 'react';
+import { AuthProvider } from './context/AuthContext';
+import { useAuth } from './hooks/useAuth';
+import { CartProvider } from './context/CartContext';
+import { ToastProvider } from './context/ToastContext';
+import { AppLayout } from './components/layout/AppLayout';
 
-function App() {
-  const [count, setCount] = useState(0)
+// Pages
+import { AuthPage } from './pages/auth/AuthPage';
+import { HomePage } from './pages/Home/HomePage';
+import { ProductsPage } from './pages/Products/ProductsPage';
+import { CartPage } from './pages/Cart/CartPage';
+import { CheckoutPage } from './pages/Checkout/CheckoutPage';
+import { OrderConfirmationPage } from './pages/OrderConfirmation/OrderConfirmationPage';
+import { MyOrdersPage } from './pages/MyOrders/MyOrdersPage';
+import { WalletPage } from './pages/Wallet/WalletPage';
+import { NotificationsPage } from './pages/Notifications/NotificationsPage';
+import { ProfilePage } from './pages/Profile/ProfilePage';
 
-  return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
+import './App.css';
+
+function MainApp() {
+  const { isLoggedIn, loading } = useAuth();
+
+  const getInitialPage = () => {
+    const hash = window.location.hash.replace('#', '').trim();
+    const validPages = ['home', 'products', 'cart', 'checkout', 'orders', 'wallet', 'notifications', 'profile'];
+    return validPages.includes(hash) ? hash : 'home';
+  };
+
+  const [currentPage, setCurrentPage] = useState(getInitialPage);
+  const [navParams, setNavParams] = useState({});
+
+  // Sync hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '').trim();
+      const validPages = ['home', 'products', 'cart', 'checkout', 'orders', 'wallet', 'notifications', 'profile'];
+      if (validPages.includes(hash)) {
+        setCurrentPage(hash);
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const navigateTo = (page, params = {}) => {
+    setCurrentPage(page);
+    setNavParams(params);
+    window.location.hash = `#${page}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-8 h-8 border-3 border-[#FF7900] border-t-transparent rounded-full animate-spin" />
+          <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+            Loading Portal...
           </p>
         </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+      </div>
+    );
+  }
 
-      <div className="ticks"></div>
+  // Not logged in -> Show Guest Registration & Login Screen
+  if (!isLoggedIn) {
+    return <AuthPage />;
+  }
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+  // Render active page
+  const renderCurrentPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return <HomePage onNavigate={navigateTo} />;
+      case 'products':
+        return <ProductsPage onNavigate={navigateTo} navParams={navParams} />;
+      case 'cart':
+        return <CartPage onNavigate={navigateTo} />;
+      case 'checkout':
+        return <CheckoutPage onNavigate={navigateTo} />;
+      case 'confirmation':
+        return <OrderConfirmationPage order={navParams?.order} onNavigate={navigateTo} />;
+      case 'orders':
+        return <MyOrdersPage onNavigate={navigateTo} navParams={navParams} />;
+      case 'wallet':
+        return <WalletPage />;
+      case 'notifications':
+        return <NotificationsPage />;
+      case 'profile':
+        return <ProfilePage />;
+      default:
+        return <HomePage onNavigate={navigateTo} />;
+    }
+  };
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+  return (
+    <AppLayout currentPage={currentPage} onNavigate={navigateTo}>
+      {renderCurrentPage()}
+    </AppLayout>
+  );
 }
 
-export default App
+export default function App() {
+  return (
+    <AuthProvider>
+      <CartProvider>
+        <ToastProvider>
+          <MainApp />
+        </ToastProvider>
+      </CartProvider>
+    </AuthProvider>
+  );
+}

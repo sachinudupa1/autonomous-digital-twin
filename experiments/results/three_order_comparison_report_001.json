@@ -1,0 +1,206 @@
+{
+  "schema_version": "1.0",
+  "schedule_id": "three_order_comparison_schedule_001",
+  "predicted_candidate_id": "three_order_comparison_candidate_001",
+  "actual_plan_id": "three_order_comparison_candidate_001",
+  "status": "compared",
+  "lines": {
+    "line_a": {
+      "line_id": "line_a",
+      "predicted_status": "completed",
+      "actual_status": "completed",
+      "status": "compared",
+      "order_sequence_match": true,
+      "predicted_order_count": 3,
+      "actual_order_count": 3,
+      "metric_comparison": {
+        "metrics": {
+          "total_orders": {
+            "predicted": 3,
+            "actual": 3,
+            "delta_actual_minus_predicted": 0,
+            "absolute_delta": 0,
+            "percentage_delta": 0.0,
+            "exact_match": true
+          },
+          "total_balls": {
+            "predicted": 9,
+            "actual": 9,
+            "delta_actual_minus_predicted": 0,
+            "absolute_delta": 0,
+            "percentage_delta": 0.0,
+            "exact_match": true
+          },
+          "total_completion_time_seconds": {
+            "predicted": 42.56,
+            "actual": 42.76,
+            "delta_actual_minus_predicted": 0.2,
+            "absolute_delta": 0.2,
+            "percentage_delta": 0.47,
+            "exact_match": null
+          },
+          "average_order_completion_seconds": {
+            "predicted": 11.187,
+            "actual": 11.253,
+            "delta_actual_minus_predicted": 0.066,
+            "absolute_delta": 0.066,
+            "percentage_delta": 0.59,
+            "exact_match": null
+          },
+          "orders_per_minute": {
+            "predicted": 4.229,
+            "actual": 4.21,
+            "delta_actual_minus_predicted": -0.019,
+            "absolute_delta": 0.019,
+            "percentage_delta": -0.449,
+            "exact_match": null
+          },
+          "balls_per_minute": {
+            "predicted": 12.688,
+            "actual": 12.629,
+            "delta_actual_minus_predicted": -0.059,
+            "absolute_delta": 0.059,
+            "percentage_delta": -0.465,
+            "exact_match": null
+          }
+        },
+        "missing_metrics": []
+      }
+    },
+    "line_b": {
+      "line_id": "line_b",
+      "predicted_status": "completed",
+      "actual_status": "completed",
+      "status": "compared",
+      "order_sequence_match": true,
+      "predicted_order_count": 3,
+      "actual_order_count": 3,
+      "metric_comparison": {
+        "metrics": {
+          "total_orders": {
+            "predicted": 3,
+            "actual": 3,
+            "delta_actual_minus_predicted": 0,
+            "absolute_delta": 0,
+            "percentage_delta": 0.0,
+            "exact_match": true
+          },
+          "total_balls": {
+            "predicted": 9,
+            "actual": 9,
+            "delta_actual_minus_predicted": 0,
+            "absolute_delta": 0,
+            "percentage_delta": 0.0,
+            "exact_match": true
+          },
+          "total_completion_time_seconds": {
+            "predicted": 40.28,
+            "actual": 40.32,
+            "delta_actual_minus_predicted": 0.04,
+            "absolute_delta": 0.04,
+            "percentage_delta": 0.099,
+            "exact_match": null
+          },
+          "average_order_completion_seconds": {
+            "predicted": 10.427,
+            "actual": 10.48,
+            "delta_actual_minus_predicted": 0.053,
+            "absolute_delta": 0.053,
+            "percentage_delta": 0.508,
+            "exact_match": null
+          },
+          "orders_per_minute": {
+            "predicted": 4.469,
+            "actual": 4.464,
+            "delta_actual_minus_predicted": -0.005,
+            "absolute_delta": 0.005,
+            "percentage_delta": -0.112,
+            "exact_match": null
+          },
+          "balls_per_minute": {
+            "predicted": 13.406,
+            "actual": 13.393,
+            "delta_actual_minus_predicted": -0.013,
+            "absolute_delta": 0.013,
+            "percentage_delta": -0.097,
+            "exact_match": null
+          }
+        },
+        "missing_metrics": []
+      }
+    }
+  },
+  "predicted_combined_metrics": {
+    "total_orders": 6,
+    "total_balls": 18,
+    "parallel_completion_time_seconds": 42.56,
+    "orders_per_minute": 8.459,
+    "balls_per_minute": 25.376,
+    "scope": "successfully_completed_lines_only"
+  },
+  "actual_combined_metrics": {
+    "total_orders": 6,
+    "total_balls": 18,
+    "parallel_completion_time_seconds": 42.76,
+    "orders_per_minute": 8.419,
+    "balls_per_minute": 25.257,
+    "scope": "successfully_completed_lines_only"
+  },
+  "combined_comparison": {
+    "metrics": {
+      "total_orders": {
+        "predicted": 6,
+        "actual": 6,
+        "delta_actual_minus_predicted": 0,
+        "absolute_delta": 0,
+        "percentage_delta": 0.0,
+        "exact_match": true
+      },
+      "total_balls": {
+        "predicted": 18,
+        "actual": 18,
+        "delta_actual_minus_predicted": 0,
+        "absolute_delta": 0,
+        "percentage_delta": 0.0,
+        "exact_match": true
+      },
+      "parallel_completion_time_seconds": {
+        "predicted": 42.56,
+        "actual": 42.76,
+        "delta_actual_minus_predicted": 0.2,
+        "absolute_delta": 0.2,
+        "percentage_delta": 0.47,
+        "exact_match": null
+      },
+      "orders_per_minute": {
+        "predicted": 8.459,
+        "actual": 8.419,
+        "delta_actual_minus_predicted": -0.04,
+        "absolute_delta": 0.04,
+        "percentage_delta": -0.473,
+        "exact_match": null
+      },
+      "balls_per_minute": {
+        "predicted": 25.376,
+        "actual": 25.257,
+        "delta_actual_minus_predicted": -0.119,
+        "absolute_delta": 0.119,
+        "percentage_delta": -0.469,
+        "exact_match": null
+      }
+    },
+    "missing_metrics": []
+  },
+  "comparison_scope": [
+    "order assignments",
+    "product quantities",
+    "completion times",
+    "throughput"
+  ],
+  "limitations": [
+    "No acceptable-deviation thresholds have been configured.",
+    "Machine-health and wear comparisons are not included yet.",
+    "This component does not score proposals or select a plan."
+  ],
+  "selection_authority": "main_agent"
+}

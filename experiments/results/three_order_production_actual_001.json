@@ -1,0 +1,369 @@
+{
+  "plan_id": "three_order_comparison_candidate_001",
+  "schedule_id": "three_order_comparison_schedule_001",
+  "status": "completed",
+  "lines": {
+    "line_a": {
+      "line_id": "line_a",
+      "scene_id": "production_line_a",
+      "status": "completed",
+      "assigned_orders": 3,
+      "requested_parameters": {
+        "upper_belt_speed": 0.025,
+        "box_speed": 0.025,
+        "dispenser_rpm": 30.0,
+        "settle_time": 1.5
+      },
+      "effective_parameters": {
+        "upper_belt_speed": 0.0249717343,
+        "box_speed": 0.0252378157,
+        "dispenser_rpm": 30.2062450823,
+        "settle_time": 1.5299282932
+      },
+      "variation_report": {
+        "variation_profile": "production-variation-v1",
+        "variation_seed": 2026,
+        "configured_max_variation_percent": 2.0,
+        "plan_id": "three_order_comparison_candidate_001",
+        "schedule_id": "three_order_comparison_schedule_001",
+        "line_id": "line_a",
+        "requested_parameters": {
+          "upper_belt_speed": 0.025,
+          "box_speed": 0.025,
+          "dispenser_rpm": 30.0,
+          "settle_time": 1.5
+        },
+        "effective_parameters": {
+          "upper_belt_speed": 0.0249717343,
+          "box_speed": 0.0252378157,
+          "dispenser_rpm": 30.2062450823,
+          "settle_time": 1.5299282932
+        },
+        "parameter_adjustments": {
+          "upper_belt_speed": {
+            "requested": 0.025,
+            "effective": 0.0249717343,
+            "actual_change_percent": -0.113063,
+            "clamped_to_operating_bounds": false
+          },
+          "box_speed": {
+            "requested": 0.025,
+            "effective": 0.0252378157,
+            "actual_change_percent": 0.951263,
+            "clamped_to_operating_bounds": false
+          },
+          "dispenser_rpm": {
+            "requested": 30.0,
+            "effective": 30.2062450823,
+            "actual_change_percent": 0.687484,
+            "clamped_to_operating_bounds": false
+          },
+          "settle_time": {
+            "requested": 1.5,
+            "effective": 1.5299282932,
+            "actual_change_percent": 1.99522,
+            "clamped_to_operating_bounds": false
+          }
+        },
+        "deterministic": true
+      },
+      "result": {
+        "schedule_id": "three_order_comparison_schedule_001:line_a",
+        "scene": "Production - Line A",
+        "parameters": {
+          "upper_belt_speed": 0.0249717343,
+          "box_speed": 0.0252378157,
+          "dispenser_rpm": 30.2062450823,
+          "settle_time": 1.5299282932
+        },
+        "total_orders": 3,
+        "total_balls": 9,
+        "total_completion_time_seconds": 42.76,
+        "average_order_completion_seconds": 11.253,
+        "orders_per_minute": 4.21,
+        "balls_per_minute": 12.629,
+        "remaining_stock": {
+          "P1": 291,
+          "P2": 292,
+          "P3": 292,
+          "P4": 292
+        },
+        "order_results": [
+          {
+            "order_id": "LINE-A-ORDER-001",
+            "quantities": {
+              "P1": 2,
+              "P2": 1,
+              "P3": 0,
+              "P4": 0
+            },
+            "delivered": {
+              "P1": 2,
+              "P2": 1,
+              "P3": 0,
+              "P4": 0
+            },
+            "completion_time_seconds": 14.8,
+            "schedule_elapsed_seconds": 17.8
+          },
+          {
+            "order_id": "LINE-A-ORDER-002",
+            "quantities": {
+              "P1": 0,
+              "P2": 1,
+              "P3": 2,
+              "P4": 0
+            },
+            "delivered": {
+              "P1": 0,
+              "P2": 1,
+              "P3": 2,
+              "P4": 0
+            },
+            "completion_time_seconds": 9.0,
+            "schedule_elapsed_seconds": 29.8
+          },
+          {
+            "order_id": "LINE-A-ORDER-003",
+            "quantities": {
+              "P1": 1,
+              "P2": 0,
+              "P3": 0,
+              "P4": 2
+            },
+            "delivered": {
+              "P1": 1,
+              "P2": 0,
+              "P3": 0,
+              "P4": 2
+            },
+            "completion_time_seconds": 9.96,
+            "schedule_elapsed_seconds": 42.76
+          }
+        ],
+        "simulation_state": 0
+      },
+      "final_state": {
+        "scene": "Production - Line A",
+        "elapsed_seconds": 42.76,
+        "delivered": {
+          "P1": 1,
+          "P2": 0,
+          "P3": 0,
+          "P4": 2
+        },
+        "remaining_stock": {
+          "P1": 291,
+          "P2": 292,
+          "P3": 292,
+          "P4": 292
+        },
+        "active_flights": 0,
+        "active_box": "Box 2",
+        "box_positions": [
+          [
+            0.086,
+            -0.075,
+            -0.028
+          ],
+          [
+            0.086,
+            -0.075,
+            -0.028
+          ]
+        ],
+        "simulation_state": 0
+      },
+      "error": null
+    },
+    "line_b": {
+      "line_id": "line_b",
+      "scene_id": "production_line_b",
+      "status": "completed",
+      "assigned_orders": 3,
+      "requested_parameters": {
+        "upper_belt_speed": 0.025,
+        "box_speed": 0.025,
+        "dispenser_rpm": 30.0,
+        "settle_time": 1.5
+      },
+      "effective_parameters": {
+        "upper_belt_speed": 0.0250560485,
+        "box_speed": 0.0253879425,
+        "dispenser_rpm": 29.6533460105,
+        "settle_time": 1.4913240148
+      },
+      "variation_report": {
+        "variation_profile": "production-variation-v1",
+        "variation_seed": 2026,
+        "configured_max_variation_percent": 2.0,
+        "plan_id": "three_order_comparison_candidate_001",
+        "schedule_id": "three_order_comparison_schedule_001",
+        "line_id": "line_b",
+        "requested_parameters": {
+          "upper_belt_speed": 0.025,
+          "box_speed": 0.025,
+          "dispenser_rpm": 30.0,
+          "settle_time": 1.5
+        },
+        "effective_parameters": {
+          "upper_belt_speed": 0.0250560485,
+          "box_speed": 0.0253879425,
+          "dispenser_rpm": 29.6533460105,
+          "settle_time": 1.4913240148
+        },
+        "parameter_adjustments": {
+          "upper_belt_speed": {
+            "requested": 0.025,
+            "effective": 0.0250560485,
+            "actual_change_percent": 0.224194,
+            "clamped_to_operating_bounds": false
+          },
+          "box_speed": {
+            "requested": 0.025,
+            "effective": 0.0253879425,
+            "actual_change_percent": 1.55177,
+            "clamped_to_operating_bounds": false
+          },
+          "dispenser_rpm": {
+            "requested": 30.0,
+            "effective": 29.6533460105,
+            "actual_change_percent": -1.155513,
+            "clamped_to_operating_bounds": false
+          },
+          "settle_time": {
+            "requested": 1.5,
+            "effective": 1.4913240148,
+            "actual_change_percent": -0.578399,
+            "clamped_to_operating_bounds": false
+          }
+        },
+        "deterministic": true
+      },
+      "result": {
+        "schedule_id": "three_order_comparison_schedule_001:line_b",
+        "scene": "Production - Line B",
+        "parameters": {
+          "upper_belt_speed": 0.0250560485,
+          "box_speed": 0.0253879425,
+          "dispenser_rpm": 29.6533460105,
+          "settle_time": 1.4913240148
+        },
+        "total_orders": 3,
+        "total_balls": 9,
+        "total_completion_time_seconds": 40.32,
+        "average_order_completion_seconds": 10.48,
+        "orders_per_minute": 4.464,
+        "balls_per_minute": 13.393,
+        "remaining_stock": {
+          "P1": 293,
+          "P2": 291,
+          "P3": 292,
+          "P4": 291
+        },
+        "order_results": [
+          {
+            "order_id": "LINE-B-ORDER-001",
+            "quantities": {
+              "P1": 0,
+              "P2": 2,
+              "P3": 1,
+              "P4": 0
+            },
+            "delivered": {
+              "P1": 0,
+              "P2": 2,
+              "P3": 1,
+              "P4": 0
+            },
+            "completion_time_seconds": 13.2,
+            "schedule_elapsed_seconds": 16.16
+          },
+          {
+            "order_id": "LINE-B-ORDER-002",
+            "quantities": {
+              "P1": 1,
+              "P2": 0,
+              "P3": 1,
+              "P4": 1
+            },
+            "delivered": {
+              "P1": 1,
+              "P2": 0,
+              "P3": 1,
+              "P4": 1
+            },
+            "completion_time_seconds": 9.92,
+            "schedule_elapsed_seconds": 29.04
+          },
+          {
+            "order_id": "LINE-B-ORDER-003",
+            "quantities": {
+              "P1": 0,
+              "P2": 1,
+              "P3": 0,
+              "P4": 2
+            },
+            "delivered": {
+              "P1": 0,
+              "P2": 1,
+              "P3": 0,
+              "P4": 2
+            },
+            "completion_time_seconds": 8.32,
+            "schedule_elapsed_seconds": 40.32
+          }
+        ],
+        "simulation_state": 0
+      },
+      "final_state": {
+        "scene": "Production - Line B",
+        "elapsed_seconds": 40.32,
+        "delivered": {
+          "P1": 0,
+          "P2": 1,
+          "P3": 0,
+          "P4": 2
+        },
+        "remaining_stock": {
+          "P1": 293,
+          "P2": 291,
+          "P3": 292,
+          "P4": 291
+        },
+        "active_flights": 0,
+        "active_box": "Box 2",
+        "box_positions": [
+          [
+            0.086,
+            -0.075,
+            -0.028
+          ],
+          [
+            0.086,
+            -0.075,
+            -0.028
+          ]
+        ],
+        "simulation_state": 0
+      },
+      "error": null
+    }
+  },
+  "combined_metrics": {
+    "total_orders": 6,
+    "total_balls": 18,
+    "parallel_completion_time_seconds": 42.76,
+    "orders_per_minute": 8.419,
+    "balls_per_minute": 25.257,
+    "scope": "successfully_completed_lines_only"
+  },
+  "wall_clock_duration_seconds": 68.274,
+  "execution_authority": "main_agent_selected_plan",
+  "inventory_policy": "persistent_across_production_runs",
+  "variation_policy": {
+    "profile": "production-variation-v1",
+    "seed": 2026,
+    "max_relative_variation": 0.02
+  }
+}
