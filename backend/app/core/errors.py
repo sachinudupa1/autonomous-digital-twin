@@ -1,7 +1,6 @@
 import logging
 
 from fastapi import FastAPI, Request
-from fastapi.encoders import jsonable_encoder
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
@@ -41,13 +40,17 @@ def register_error_handlers(app: FastAPI) -> None:
 
     @app.exception_handler(RequestValidationError)
     async def validation_error_handler(request: Request, exc: RequestValidationError):
+        details = [
+            {
+                'field': '.'.join(str(part) for part in err['loc'] if part != 'body'),
+                'message': err['msg'],
+                'type': err['type'],
+            }
+            for err in exc.errors()
+        ]
         return JSONResponse(
             status_code=422,
-            content=error_body(
-                'validation_error',
-                'The request data is invalid.',
-                jsonable_encoder(exc.errors()),
-            ),
+            content=error_body('validation_error', 'The request data is invalid.', details),
         )
 
     @app.exception_handler(Exception)
