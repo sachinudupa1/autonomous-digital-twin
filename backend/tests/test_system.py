@@ -9,7 +9,7 @@ def test_root_message():
     response = client.get('/')
     assert response.status_code == 200
     assert 'running' in response.json()['message']
-#testing
+
 
 def test_healthz():
     response = client.get('/healthz')

@@ -1,0 +1,7 @@
+ORDERS = 'orders'
+HEALTH_READINGS = 'health_readings'
+SCHEDULING_RUNS = 'scheduling_runs'
+SCHEDULES = 'schedules'
+SIMULATION_RUNS = 'simulation_runs'
+DECISION_LOGS = 'decision_logs'
+USERS = 'users'
