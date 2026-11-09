@@ -1,0 +1,30 @@
+algorithm: PPO
+
+max_orders: 32
+
+environment:
+  max_lines: 2
+  configurable_lines: true
+  line_identifiers: null
+  allow_variable_line_count: true
+
+observation:
+  include_order_quantities: true
+  include_order_type: true
+  include_deadline: true
+  include_waiting_time: true
+  include_processing_time: true
+  include_line_availability: true
+  include_line_operating_status: true
+  include_line_health: true
+  include_line_progress: true
+  include_line_resources: true
+
+action:
+  type: discrete
+  meaning: select_order_slot
+
+training:
+  device: cpu
+  seed: 42
+  total_timesteps: 100000

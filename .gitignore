@@ -1,4 +1,4 @@
-﻿# Environment files and secrets
+# Environment files and secrets
 .env
 .env.*
 !.env.example
@@ -20,8 +20,7 @@ __pycache__/
 *$py.class
 .venv/
 venv/
-ENV/
-env/
+/env/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/

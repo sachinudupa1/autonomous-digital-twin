@@ -1,0 +1,16 @@
+Scenario,Algorithm,Order Sequence,Average Waiting Time,Average Tardiness,Makespan,Late Orders
+Scenario 1 - Tight Deadlines,FIFO,A -> B -> C,50.0,15.0,110.0,1
+Scenario 1 - Tight Deadlines,EDD,B -> A -> C,40.0,10.0,110.0,1
+Scenario 1 - Tight Deadlines,SJF,C -> B -> A,23.333333333333332,18.333333333333332,110.0,2
+Scenario 1 - Tight Deadlines,Priority Orders First,B -> A -> C,40.0,10.0,110.0,1
+Scenario 1 - Tight Deadlines,Least Slack Time First,B -> A -> C,40.0,10.0,110.0,1
+Scenario 2 - Different Arrival Times,FIFO,D -> F -> E,56.666666666666664,0.0,75.0,0
+Scenario 2 - Different Arrival Times,EDD,E -> D -> F,66.66666666666667,0.0,90.0,0
+Scenario 2 - Different Arrival Times,SJF,F -> E -> D,41.666666666666664,0.0,75.0,0
+Scenario 2 - Different Arrival Times,Priority Orders First,E -> D -> F,66.66666666666667,0.0,90.0,0
+Scenario 2 - Different Arrival Times,Least Slack Time First,E -> D -> F,66.66666666666667,0.0,90.0,0
+Scenario 3 - Mixed Priorities,FIFO,G -> H -> I,41.666666666666664,8.333333333333334,85.0,1
+Scenario 3 - Mixed Priorities,EDD,H -> G -> I,33.333333333333336,0.0,85.0,0
+Scenario 3 - Mixed Priorities,SJF,I -> H -> G,15.0,0.0,85.0,0
+Scenario 3 - Mixed Priorities,Priority Orders First,H -> G -> I,33.333333333333336,0.0,85.0,0
+Scenario 3 - Mixed Priorities,Least Slack Time First,H -> G -> I,33.333333333333336,0.0,85.0,0
