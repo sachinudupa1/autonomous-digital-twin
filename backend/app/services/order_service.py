@@ -94,7 +94,7 @@ def get_tracking(order_id: str, token: str | None) -> dict:
     }
 
 
-def update_order_status(order_id: str, new_status: str) -> None:
+def update_order_status(order_id: str, new_status: str, at=None) -> None:
     order = repo.get_document(col.ORDERS, order_id)
     if order is None:
         raise AppError(404, 'order_not_found', 'That order does not exist.')
@@ -106,5 +106,44 @@ def update_order_status(order_id: str, new_status: str) -> None:
             'Cannot change status from ' + order['status'] + ' to ' + new_status + '.',
         )
     now = repo.utc_now()
-    changes = {'status': new_status, 'updated_at_utc': now, STATUS_TIME_FIELDS[new_status]: now}
+    changes = {
+        'status': new_status,
+        'updated_at_utc': now,
+        STATUS_TIME_FIELDS[new_status]: at or now,
+    }
     repo.update_document(col.ORDERS, order_id, changes)
+
+INTERNAL_FIELDS = [
+    'order_id',
+    'items',
+    'total_quantity',
+    'order_type',
+    'requested_deadline_utc',
+    'status',
+    'scheduling_run_id',
+    'created_at_utc',
+    'updated_at_utc',
+    'queued_at_utc',
+    'packing_started_at_utc',
+    'completed_at_utc',
+]
+
+
+def to_internal_view(order: dict) -> dict:
+    return {field: order.get(field) for field in INTERNAL_FIELDS}
+
+
+def list_internal_orders(status=None, order_type=None, limit=50) -> list[dict]:
+    filters = {}
+    if status:
+        filters['status'] = status
+    if order_type:
+        filters['order_type'] = order_type
+    orders = repo.query_documents(
+        col.ORDERS,
+        filters=filters,
+        order_by='created_at_utc',
+        descending=True,
+        limit=limit,
+    )
+    return [to_internal_view(order) for order in orders]

@@ -5,7 +5,7 @@ from typing import Any
 
 from google.api_core.exceptions import GoogleAPICallError, NotFound
 from google.cloud.firestore_v1.base_query import FieldFilter
-
+from google.cloud.firestore import Query
 from backend.app.core.errors import AppError
 from backend.app.core.firebase import get_db
 
@@ -61,20 +61,25 @@ def update_document(collection: str, doc_id: str, changes: dict[str, Any]) -> No
 
 
 @handle_db_errors
+@handle_db_errors
 def query_documents(
     collection: str,
     filters: dict[str, Any] | None = None,
+    conditions: list[tuple[str, str, Any]] | None = None,
     order_by: str | None = None,
+    descending: bool = False,
     limit: int = 50,
 ) -> list[dict[str, Any]]:
     query = get_db().collection(collection)
     for field, value in (filters or {}).items():
         query = query.where(filter=FieldFilter(field, '==', value))
+    for field, operator, value in conditions or []:
+        query = query.where(filter=FieldFilter(field, operator, value))
     if order_by:
-        query = query.order_by(order_by)
+        direction = Query.DESCENDING if descending else Query.ASCENDING
+        query = query.order_by(order_by, direction=direction)
     query = query.limit(limit)
     return [{'id': doc.id, **(doc.to_dict() or {})} for doc in query.stream()]
-
 
 @handle_db_errors
 def delete_document(collection: str, doc_id: str) -> None:

@@ -3,7 +3,19 @@ from datetime import datetime, timezone
 import pytest
 
 from backend.app.core.errors import AppError
-from backend.app.services import order_service
+from fastapi.testclient import TestClient
+
+from backend.app.core import security
+from backend.app.core.security import CurrentUser, get_current_user
+from backend.app.main import app
+from backend.app.services import (
+    bridge_service,
+    dashboard_service,
+    health_service,
+    order_service,
+    scheduling_service,
+    state_service,
+)
 
 
 class FakeRepo:
@@ -63,6 +75,42 @@ class FakeRepo:
 @pytest.fixture
 def fake_repo(monkeypatch):
     fake = FakeRepo()
-    for module in (order_service,):
+    for module in (
+        security,
+        order_service,
+        health_service,
+        state_service,
+        scheduling_service,
+        bridge_service,
+        dashboard_service,
+    ):
         monkeypatch.setattr(module, 'repo', fake)
     return fake
+
+
+@pytest.fixture
+def login_as():
+    def _login(role):
+        app.dependency_overrides[get_current_user] = lambda: CurrentUser(
+            uid='test-' + role, email=None, role=role
+        )
+
+    yield _login
+    app.dependency_overrides.clear()
+
+
+@pytest.fixture
+def place_order():
+    client = TestClient(app)
+
+    def _place(order_type='normal'):
+        payload = {
+            'schema_version': '1.0',
+            'items': {'ball_1': 2, 'ball_2': 3, 'ball_3': 0, 'ball_4': 1},
+            'order_type': order_type,
+        }
+        response = client.post('/api/v1/orders', json=payload)
+        assert response.status_code == 201
+        return response.json()
+
+    return _place

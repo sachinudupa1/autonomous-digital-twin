@@ -62,3 +62,18 @@ class TrackingResponse(BaseModel):
     items: dict[str, int]
     status: Literal['Order Received', 'Queued', 'Packing', 'Completed']
     completed_at_utc: datetime | None = None
+
+
+class InternalOrder(BaseModel):
+    order_id: str
+    items: dict[str, int]
+    total_quantity: int
+    order_type: str
+    requested_deadline_utc: datetime | None = None
+    status: str
+    scheduling_run_id: str | None = None
+    created_at_utc: datetime | None = None
+    updated_at_utc: datetime | None = None
+    queued_at_utc: datetime | None = None
+    packing_started_at_utc: datetime | None = None
+    completed_at_utc: datetime | None = None
